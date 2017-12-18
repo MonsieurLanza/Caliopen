@@ -58,7 +58,7 @@ class SearchField extends Component {
             onChange={this.handleInputChange}
             value={this.state.term}
             placeholder={i18n._('header.menu.search', { defaults: 'Search' })}
-            className="m-search-field__input m-input-text"
+            className="m-search-field__input"
           />
           <RawButton
             className="m-search-field__button"
