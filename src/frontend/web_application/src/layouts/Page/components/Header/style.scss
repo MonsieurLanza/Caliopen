@@ -24,6 +24,7 @@ $l-header__margin: ($co-margin / 2) !default;
     height: $l-header__height;
     padding: 0 $co-margin;
     line-height: $l-header__height;
+    display: none;
   }
 
   &__menu-icon {
@@ -39,7 +40,6 @@ $l-header__margin: ($co-margin / 2) !default;
   }
 
   &__take-a-tour,
-  &__search,
   &__user {
     display: none;
     height: $l-header__height;
@@ -47,37 +47,33 @@ $l-header__margin: ($co-margin / 2) !default;
   }
 
   &__search {
-    &--as-dropdown {
-      @include flex-grid-column(12);
-      display: block;
-    }
+    height: $l-header__height;
+    line-height: $l-header__height;
+    margin-left: auto;
+    padding-right: $co-component__spacing;
+    flex: 0 1;
   }
 
+  &__toggle-nav,
   &__search-toggler {
     @include flex-grid-column(shrink);
     height: $l-header__height;
     line-height: $l-header__height;
   }
 
-  &__m-search-field {
-    max-width: 45rem;
-  }
-
   @include breakpoint(medium) {
     &__wrapper { box-shadow: none; }
-    &__brand { @include flex-grid-size(shrink); }
-    &__search { @include flex-grid-size; }
+    &__toggle-nav { display: none; }
+    &__brand {
+      @include flex-grid-size(shrink);
+      display: block;
+    }
     &__take-a-tour,
     &__user { @include flex-grid-size(shrink); }
 
-    &__search,
     &__take-a-tour,
     &__user {
       display: block;
-    }
-    &__search {
-      padding-left: $co-margin;
-      padding-right: $co-margin;
     }
     &__user {
       padding-right: $co-margin;
