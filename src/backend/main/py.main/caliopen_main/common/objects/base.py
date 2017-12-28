@@ -291,6 +291,30 @@ class ObjectUser(ObjectStorable):
         self.user_id = user.user_id
         super(ObjectUser, self).__init__(**params)
 
+    def marshall_dict(self, **options):
+        """output a dict representation of self 'public' attributes"""
+
+        self_dict = {}
+        for att, val in vars(self).items():
+            if not att.startswith("_") and val is not None and att != 'user':
+                if isinstance(self._attrs[att], types.ListType):
+                    lst = []
+                    if len(att) > 0:
+                        if issubclass(self._attrs[att][0], ObjectDictifiable):
+                            for item in val:
+                                lst.append(item.marshall_dict())
+                        else:
+                            lst = val
+                        self_dict[att] = lst
+                    else:
+                        self_dict[att] = lst
+                elif issubclass(self._attrs[att], ObjectDictifiable):
+                    self_dict[att] = val.marshall_dict()
+                else:
+                    self_dict[att] = val
+
+        return self_dict
+
     @classmethod
     def list_db(cls, user_id):
         """List all objects that belong to an user."""
@@ -645,7 +669,11 @@ def unmarshall_item(document, key, target_object, target_attr_type,
         setattr(target_object, key, lst)
 
     elif issubclass(target_attr_type, ObjectDictifiable):
-        sub_obj = target_attr_type()
+        if hasattr(target_object, 'user'):
+            opts = {'user': target_object.user}
+        else:
+            opts = {}
+        sub_obj = target_attr_type(**opts)
         sub_obj.unmarshall_dict(document[key])
         setattr(target_object, key, sub_obj)
 
