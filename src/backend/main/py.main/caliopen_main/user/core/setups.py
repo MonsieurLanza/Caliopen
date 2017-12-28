@@ -120,7 +120,7 @@ def setup_settings(user, settings):
             settings.notification_delay_disappear,
     }
 
-    obj = ObjectSettings(user.user_id)
+    obj = ObjectSettings(user)
     obj.unmarshall_dict(settings)
     obj.marshall_db()
     obj.save_db()
