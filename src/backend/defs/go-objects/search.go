@@ -13,6 +13,7 @@ type IndexSearch struct {
 	Limit   int                 `json:"limit"`
 	Offset  int                 `json:"offset"`
 	Terms   map[string][]string `json:"terms"`
+	Shard_id   string           `json:"shard_id"`
 	User_id UUID                `json:"user_id"`
 	DocType string              `json:"doc_type"`
 	ILrange [2]int8             `json:"il_range"`
