@@ -12,14 +12,14 @@ import (
 	"github.com/satori/go.uuid"
 )
 
-func (es *ElasticSearchBackend) CreateMessage(msg *objects.Message) error {
+func (es *ElasticSearchBackend) CreateMessage(user *objects.UserInfo, msg *objects.Message) error {
 
 	es_msg, err := msg.MarshalES()
 	if err != nil {
 		return err
 	}
 
-	resp, err := es.Client.Index().Index(msg.User_id.String()).Type(objects.MessageIndexType).Id(msg.Message_id.String()).
+	resp, err := es.Client.Index().Index(user.Shard_id).Type(objects.MessageIndexType).Id(msg.Message_id.String()).
 		BodyString(string(es_msg)).
 		Refresh("wait_for").
 		Do(context.TODO())
@@ -32,9 +32,9 @@ func (es *ElasticSearchBackend) CreateMessage(msg *objects.Message) error {
 
 }
 
-func (es *ElasticSearchBackend) UpdateMessage(msg *objects.Message, fields map[string]interface{}) error {
+func (es *ElasticSearchBackend) UpdateMessage(user *objects.UserInfo, msg *objects.Message, fields map[string]interface{}) error {
 
-	update, err := es.Client.Update().Index(msg.User_id.String()).Type(objects.MessageIndexType).Id(msg.Message_id.String()).
+	update, err := es.Client.Update().Index(user.Shard_id).Type(objects.MessageIndexType).Id(msg.Message_id.String()).
 		Doc(fields).
 		Refresh("wait_for").
 		Do(context.TODO())
@@ -46,12 +46,12 @@ func (es *ElasticSearchBackend) UpdateMessage(msg *objects.Message, fields map[s
 	return nil
 }
 
-func (es *ElasticSearchBackend) SetMessageUnread(user_id, message_id string, status bool) (err error) {
+func (es *ElasticSearchBackend) SetMessageUnread(user *objects.UserInfo, message_id string, status bool) (err error) {
 	payload := struct {
 		Is_unread bool `json:"is_unread"`
 	}{status}
 
-	update := es.Client.Update().Index(user_id).Type(objects.MessageIndexType).Id(message_id)
+	update := es.Client.Update().Index(user.Shard_id).Type(objects.MessageIndexType).Id(message_id)
 	_, err = update.Doc(payload).Refresh("true").Do(context.TODO())
 
 	return

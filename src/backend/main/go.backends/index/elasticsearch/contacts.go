@@ -15,8 +15,8 @@ func (es *ElasticSearchBackend) CreateContact(contact *Contact) error {
 	return errors.New("[ElasticSearchBackend] not implemented")
 }
 
-func (es *ElasticSearchBackend) UpdateContact(contact *Contact, fields map[string]interface{}) error {
-	update, err := es.Client.Update().Index(contact.UserId.String()).Type(ContactIndexType).Id(contact.ContactId.String()).
+func (es *ElasticSearchBackend) UpdateContact(user *UserInfo, contact *Contact, fields map[string]interface{}) error {
+	update, err := es.Client.Update().Index(user.Shard_id).Type(ContactIndexType).Id(contact.ContactId.String()).
 		Doc(fields).
 		Refresh("wait_for").
 		Do(context.TODO())
@@ -26,10 +26,6 @@ func (es *ElasticSearchBackend) UpdateContact(contact *Contact, fields map[strin
 	}
 	log.Infof("New version of indexed contact %s is now %d", update.Id, update.Version)
 	return nil
-}
-
-func (es *ElasticSearchBackend) SetContactUnread(user_id, Contact_id string, status bool) (err error) {
-	return errors.New("[ElasticSearchBackend] not implemented")
 }
 
 func (es *ElasticSearchBackend) FilterContacts(filter IndexSearch) (Contacts []*Contact, totalFound int64, err error) {

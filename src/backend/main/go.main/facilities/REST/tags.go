@@ -111,10 +111,10 @@ func (rest *RESTfacility) DeleteTag(user_id, tag_name string) error {
 // - calls generic UpdateWithPatch func to patch the resource,
 // - saves and indexes updated resource.
 // It is caller responsibility to call this func with a well-formed patch that has only "tags" properties
-func (rest *RESTfacility) UpdateResourceTags(userID, resourceID, resourceType string, patch []byte) error {
+func (rest *RESTfacility) UpdateResourceTags(user *UserInfo, resourceID, resourceType string, patch []byte) error {
 	var err error
 	// 1. check that tag_names within patch belong to user and are unique
-	tags, err := rest.RetrieveUserTags(userID)
+	tags, err := rest.RetrieveUserTags(user.User_id)
 	if err != nil {
 		return err
 	}
@@ -132,7 +132,7 @@ func (rest *RESTfacility) UpdateResourceTags(userID, resourceID, resourceType st
 	for _, tag := range p.Get("tags").MustStringArray() {
 		// is tag belonging to user ?
 		if _, ok := userTagsMap[tag]; !ok {
-			err = fmt.Errorf("[RESTfacility] UpdateResourceTags : tag with name <%s> does not belong to user <%s>", tag, userID)
+			err = fmt.Errorf("[RESTfacility] UpdateResourceTags : tag with name <%s> does not belong to user <%s>", tag, user.User_id)
 			break
 		}
 		// is tag unique ?
@@ -154,13 +154,13 @@ func (rest *RESTfacility) UpdateResourceTags(userID, resourceID, resourceType st
 
 	switch resourceType {
 	case MessageType:
-		m, err := rest.store.RetrieveMessage(userID, resourceID)
+		m, err := rest.store.RetrieveMessage(user.User_id, resourceID)
 		if err != nil {
 			return err
 		}
 		obj = CaliopenObject(m)
 	case ContactType:
-		c, err := rest.store.RetrieveContact(userID, resourceID)
+		c, err := rest.store.RetrieveContact(user.User_id, resourceID)
 		if err != nil {
 			return err
 		}
@@ -184,7 +184,7 @@ func (rest *RESTfacility) UpdateResourceTags(userID, resourceID, resourceType st
 			return err
 		}
 
-		err = rest.index.UpdateMessage(obj.(*Message), update)
+		err = rest.index.UpdateMessage(user, obj.(*Message), update)
 		if err != nil {
 			return err
 		}
@@ -197,7 +197,7 @@ func (rest *RESTfacility) UpdateResourceTags(userID, resourceID, resourceType st
 			return err
 		}
 
-		err = rest.index.UpdateContact(obj.(*Contact), update)
+		err = rest.index.UpdateContact(user, obj.(*Contact), update)
 		if err != nil {
 			return err
 		}
