@@ -316,12 +316,12 @@ class ObjectUser(ObjectStorable):
         return self_dict
 
     @classmethod
-    def list_db(cls, user_id):
+    def list_db(cls, user):
         """List all objects that belong to an user."""
-        models = cls._model_class.filter(user_id=user_id)
+        models = cls._model_class.filter(user_id=user.user_id)
         objects = []
         for model in models:
-            obj = cls(user_id)
+            obj = cls(user)
             obj._db = model
             obj.unmarshall_db()
             objects.append(obj)
