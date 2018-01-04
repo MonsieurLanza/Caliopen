@@ -198,6 +198,7 @@ func (ac *Auth_cache) UnmarshalJSON(b []byte) error {
 		Expires_in    int    `json:"expires_in"`
 		Expires_at    string `json:"expires_at"`
 		Refresh_token string `json:"refresh_token"`
+		Shard_id      string `json:"shard_id"`
 	}
 	if err := json.Unmarshal(b, &temp); err != nil {
 		return err
@@ -210,5 +211,6 @@ func (ac *Auth_cache) UnmarshalJSON(b []byte) error {
 	}
 	ac.Expires_at = expire
 	ac.Refresh_token = temp.Refresh_token
+	ac.Shard_id = temp.Shard_id
 	return nil
 }
