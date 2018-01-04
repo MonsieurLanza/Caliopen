@@ -201,6 +201,13 @@ func PatchResourceWithTags(ctx *gin.Context) {
 			return
 		}
 	}
+	shard_id, ok := ctx.Get("shard_id")
+	if !ok {
+		e := swgErr.New(http.StatusBadRequest, "shard_id is missing in context")
+		http_middleware.ServeError(ctx.Writer, ctx.Request, e)
+		ctx.Abort()
+		return
+	}
 
 	// parse payload and ensure it is a patch for tags property only
 	patch, err = ioutil.ReadAll(ctx.Request.Body)
@@ -257,7 +264,8 @@ func PatchResourceWithTags(ctx *gin.Context) {
 		return
 	}
 
-	err = caliopen.Facilities.RESTfacility.UpdateResourceTags(userID, resourceID, resourceType, patch)
+	user_info := &UserInfo{User_id: userID, Shard_id: shard_id.(string)}
+	err = caliopen.Facilities.RESTfacility.UpdateResourceTags(user_info, resourceID, resourceType, patch)
 
 	if err != nil {
 		http_middleware.ServeError(ctx.Writer, ctx.Request, err)
