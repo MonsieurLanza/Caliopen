@@ -59,7 +59,7 @@ func (es *ElasticSearchBackend) SetMessageUnread(user *objects.UserInfo, message
 
 func (es *ElasticSearchBackend) FilterMessages(filter objects.IndexSearch) (messages []*objects.Message, totalFound int64, err error) {
 
-	search := es.Client.Search().Index(filter.User_id.String()).Type(objects.MessageIndexType)
+	search := es.Client.Search().Index(filter.Shard_id).Type(objects.MessageIndexType)
 	search = filter.FilterQuery(search).Sort("date_insert", false)
 
 	if filter.Offset > 0 {
@@ -68,7 +68,6 @@ func (es *ElasticSearchBackend) FilterMessages(filter objects.IndexSearch) (mess
 	if filter.Limit > 0 {
 		search = search.Size(filter.Limit)
 	}
-
 	result, err := search.Do(context.TODO())
 
 	if err != nil {
