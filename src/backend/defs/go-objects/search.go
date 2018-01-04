@@ -43,8 +43,9 @@ type IndexHit struct {
 }
 
 func (is *IndexSearch) FilterQuery(service *elastic.SearchService) *elastic.SearchService {
-
 	q := elastic.NewBoolQuery()
+	// Strictly filter on user_id
+	q = q.Filter(elastic.NewTermQuery("user_id", is.User_id))
 	for name, values := range is.Terms {
 		for _, value := range values {
 			q = q.Filter(elastic.NewTermQuery(name, value))
