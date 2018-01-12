@@ -2,12 +2,16 @@
 @import '../../../../styles/vendor/bootstrap_foundation-sites';
 
 .l-navigation {
+  max-width: $co-site-width;
+  margin-right: auto;
+  margin-left: auto;
 
   &__wrapper {
     @include flex-grid-row($size: expand);
     position: fixed;
     z-index: $l-z-index__navbar;
     width: 100%;
+    max-width: $co-site-width;
     min-height: $co-component__height;
     padding-top: .75rem;
     transition: $co-animation__margin-transition;
@@ -51,7 +55,7 @@
   &__sliders-dropdown {
     width: calc(1 + 2 * 1rem); // width of the toggle button: icon width + padding
     height: 50vh;
-    background-color: $co-color__fg__back--higher;
+    background-color: $co-color__fg__back;
     box-shadow: $co-shadow;
     white-space: nowrap;
   }

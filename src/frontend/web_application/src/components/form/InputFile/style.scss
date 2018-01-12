@@ -12,7 +12,7 @@
 
   &__label {
     @include flex-grid-row;
-    @include o-form-element--dark;
+    @include o-form-element--light;
     @include o-hidden-element--label;
     margin-top: $co-margin;
     overflow: hidden;

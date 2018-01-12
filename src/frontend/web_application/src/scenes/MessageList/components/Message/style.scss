@@ -25,11 +25,11 @@
     @include flex-grid-row($size: expand);
     align-items: center;
     border-bottom: 1px solid $co-color__fg__back--lower;
-    background: $co-color__fg__back--high;
+    background: $co-color__fg__back;
     font-size: $co-font__size--small;
 
     &--is-unread {
-      background: $co-color__fg__back--higher;
+      background: $co-color__fg__back;
     }
   }
 
@@ -61,7 +61,7 @@
     color: $co-color__fg__text--lower;
 
     &--is-unread {
-      background: $co-color__fg__back--higher;
+      background: $co-color__fg__back;
       color: $co-color__fg__text;
     }
   }
@@ -104,7 +104,7 @@
 
   &__footer {
     min-height: $co-component__height;
-    background: $co-color__fg__back--high;
+    background: $co-color__fg__back;
     border-top: 1px solid $co-color__fg__back--lower;
     color: $co-color__fg__text--lower;
     line-height: $co-component__height;
@@ -114,7 +114,7 @@
   &__footer-button {
     &,
     &:hover {
-      background: $co-color__fg__back--high;
+      background: $co-color__fg__back;
     }
   }
 

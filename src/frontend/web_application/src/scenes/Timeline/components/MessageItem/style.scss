@@ -4,31 +4,52 @@
 .s-message-item {
   @include flex-grid-row($size: expand);
   align-items: center;
-  height: 2 * $co-component__height;
+  min-height: $co-component__height;
+  background-color: $co-color__fg__back--low;
 
-  &:hover {
-    color: $co-color__fg__text--high;
+  &::before {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 7px;
+    background: transparent;
   }
 
-  &:active {
-    color: $co-color__fg__text--low;
+  &--pi-ugly {
+    &::before {
+      background: map-get($privacy-palette, 'ugly');
+    }
+  }
+
+  &--pi-bad {
+    &::before {
+      background: map-get($privacy-palette, 'bad');
+    }
+  }
+
+  &--pi-good {
+    &::before {
+      background: map-get($privacy-palette, 'good');
+    }
+  }
+
+  &--pi-super {
+    &::before {
+      background: map-get($privacy-palette, 'super');
+    }
   }
 
   &--draft,
   &--unread {
     position: relative;
-    background-color: $co-color__fg__back--higher;
-    color: $co-color__fg__text--higher;
+    background-color: $co-color__fg__back;
+    color: $co-color__fg__text;
+  }
 
-    &::before {
-      display: block;
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 3px;
-      background: $co-color__primary;
-    }
+  &--is-selected {
+    background-color: $co-color__bg__back--higher;
   }
 
   &__col-avatars {
@@ -36,26 +57,51 @@
   }
 
   &__col-title {
-    @include flex-grid-column;
+    @include flex-grid-size;
     min-width: 0; // https://github.com/zurb/foundation-sites/pull/8511
   }
 
+  &__title-content {
+    @include flex-grid-row($size: expand);
+  }
+
+  &__title-author {
+    @include flex-grid-column(12);
+    font-weight: 600;
+    color: $co-color__primary--lower;
+  }
+
+  &__title-subject {
+    @include flex-grid-column(12);
+  }
+
   &__col-file {
-    @include flex-grid-column(1);
+    @include flex-grid-column(shrink);
+    display: none;
   }
 
   &__col-dates {
-    @include flex-grid-column(2);
-    display: none;
-    font-weight: 600;
+    @include flex-grid-size(2);
+    text-align: right;
   }
 
-  &__subject {
-    color: $co-color__fg__text--low;
-    margin-right: $co-component__spacing * 2;
+  &__col-select {
+    @include flex-grid-column(shrink);
+    display: none;
   }
 
   @include breakpoint(medium) {
-    &__col-dates { display: block; }
+    &__col-select,
+    &__col-file { display: block; }
+
+    &__title-author {
+      @include flex-grid-size(shrink);
+      padding-right: 0;
+      padding-left: 0;
+    }
+
+    &__title-subject {
+      @include flex-grid-column;
+    }
   }
 }

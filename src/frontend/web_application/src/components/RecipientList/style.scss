@@ -3,7 +3,7 @@
 
 .m-recipient-list {
   @include o-form-element;
-  @include o-form-element--dark;
+  @include o-form-element--light;
   @include flex-grid-row($size: expand);
 
   min-height: $co-component__height;

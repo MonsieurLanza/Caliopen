@@ -37,6 +37,7 @@ class Presenter extends Component {
           toggleId="co-user-menu"
           display="expanded"
           icon="user"
+          className="m-user-menu__dropdown-control"
         >
           <span className="show-for-small-only">{user && user.name}</span>&nbsp;
           <Icon type={this.state.isDropdownOpen ? 'caret-up' : 'caret-down'} />

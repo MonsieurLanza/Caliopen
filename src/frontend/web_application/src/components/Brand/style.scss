@@ -7,18 +7,18 @@
   }
 
   path {
-    fill: $co-color__fg__text;
+    fill: $co-color__contrast__text;
   }
 
   &--high {
     path {
-      fill: $co-color__fg__text--high;
+      fill: $co-color__contrast__text--high;
     }
   }
 
   &--low {
     path {
-      fill: $co-color__fg__text--lower;
+      fill: $co-color__contrast__text--lower;
     }
   }
 }

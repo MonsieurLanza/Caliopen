@@ -2,7 +2,7 @@
 @import '../../styles/object/o-triangle';
 
 .m-dropdown-menu {
-  background-color: $co-color__primary--lower;
+  background-color: $co-color__fg__back;
 
   &--has-triangle {
     &::before {

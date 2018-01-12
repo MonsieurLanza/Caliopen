@@ -36,7 +36,6 @@ class Timeline extends Component {
     didInvalidate: false,
     hasMore: false,
   };
-  state = {};
 
   componentDidMount() {
     const { requestMessages, timelineFilter, loadMore } = this.props;

@@ -12,7 +12,7 @@
 
   &__input {
     @include o-form-element;
-    @include o-form-element--dark;
+    @include o-form-element--light;
   }
 
   &__calendar {

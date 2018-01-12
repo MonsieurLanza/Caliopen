@@ -15,7 +15,7 @@ $l-header__margin: ($co-margin / 2) !default;
 
     width: 100%;
     min-height: $l-header__height;
-    background: $co-color__fg__back;
+    background: $co-color__contrast__back;
     box-shadow: $co-shadow;
   }
 
@@ -29,7 +29,6 @@ $l-header__margin: ($co-margin / 2) !default;
 
   &__menu-icon {
     margin-right: ($co-margin / 2);
-
     border: 0;
     background: transparent;
   }

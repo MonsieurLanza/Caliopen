@@ -5,7 +5,7 @@
 .m-address-form {
   &__select { // TODO: insert a wrapper to select to fit new SelectFieldGroup architecture
     @include o-form-element;
-    @include o-form-element--dark;
+    @include o-form-element--light;
   }
 
   &__col-button { @include flex-grid-size(shrink); }

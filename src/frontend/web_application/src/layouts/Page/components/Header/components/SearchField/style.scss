@@ -40,10 +40,10 @@
 
     border: 0;
     background: transparent;
-    color: $co-color__fg__text--lower;
+    color: $co-color__contrast__text--lower;
 
-    &:hover   { color: $co-color__fg__text--high; }
-    &:active  { color: $co-color__fg__text--lower; }
+    &:hover   { color: $co-color__contrast__text--high; }
+    &:active  { color: $co-color__contrast__text--lower; }
     &:focus   { outline: 0; }
   }
 

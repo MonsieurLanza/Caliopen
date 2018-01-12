@@ -1,6 +1,6 @@
 @import '../../styles/common';
 
-$m-author-avatar__size: 40px;
+$m-author-avatar__size: 26px;
 $m-author-avatar__padding: 0;
 
 .m-author-avatar {
@@ -20,6 +20,7 @@ $m-author-avatar__padding: 0;
       float: left;
       width: $m-author-avatar__size;
       height: $m-author-avatar__size;
+      color: $co-color__contrast__text;
       line-height: $m-author-avatar__size;
       text-align: center;
     }

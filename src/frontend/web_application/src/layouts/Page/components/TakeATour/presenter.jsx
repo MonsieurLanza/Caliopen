@@ -4,6 +4,8 @@ import { Trans } from 'lingui-react';
 import Tour from './components/Tour';
 import Button from '../../../../components/Button';
 
+import './style.scss';
+
 class TakeATour extends Component {
   static propTypes = {
     i18n: PropTypes.shape({}).isRequired,
@@ -80,7 +82,7 @@ class TakeATour extends Component {
     ];
 
     return (
-      <Button onClick={this.handleToggleTour} icon="question-circle" display="expanded">
+      <Button onClick={this.handleToggleTour} icon="question-circle" display="expanded" className="m-take-a-tour__icon">
         <span className="show-for-sr"><Trans id="take-a-tour.action.toggle">Take a tour</Trans></span>
         <Tour
           isOpen={this.state.isTourActive}

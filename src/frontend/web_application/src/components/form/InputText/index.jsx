@@ -15,7 +15,7 @@ class InputText extends PureComponent {
 
   static defaultProps = {
     expanded: false,
-    theme: 'dark',
+    theme: 'light',
     bottomSpace: false,
     hasError: false,
     className: null,
@@ -31,6 +31,7 @@ class InputText extends PureComponent {
       {
         'm-input-text--expanded': expanded,
         'm-input-text--light': theme === 'light',
+        'm-input-text--dark': theme === 'dark',
         'm-input-text--bottom-space': bottomSpace,
         'm-input-text--error': hasError,
       },

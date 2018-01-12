@@ -30,12 +30,12 @@
         $color-hover: scale-color($color, $lightness: -50%);
         border-color: transparent;
         background-color: $color;
-        color: $co-color__fg__text--low;
+        color: $co-color__contrast__text--low;
 
         &:hover,
         &:focus {
           background-color: $color-hover;
-          color: $co-color__fg__text--high;
+          color: $co-color__contrast__text--high;
         }
       }
     }
@@ -50,7 +50,7 @@
         &:hover,
         &:focus {
           background-color: transparent;
-          color: $co-color__fg__text--high;
+          color: $co-color__contrast__text--high;
         }
       }
     }

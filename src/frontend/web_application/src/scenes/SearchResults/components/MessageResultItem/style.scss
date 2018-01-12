@@ -9,7 +9,7 @@
 
   &:hover {
     color: $co-color__fg__text--high;
-    background-color: $co-color__fg__back--high;
+    background-color: $co-color__fg__back;
   }
 
   &:active {
@@ -19,7 +19,7 @@
   &--draft,
   &--unread {
     position: relative;
-    background-color: $co-color__fg__back--higher;
+    background-color: $co-color__fg__back;
     color: $co-color__fg__text--higher;
 
     &::before {

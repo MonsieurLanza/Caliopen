@@ -5,7 +5,7 @@
   @include flex-grid-row($size: expanded);
   height: $co-component__height;
   margin-bottom: map-get($co-form__spacing, 'small');
-  background: $co-color__fg__back--high;
+  background: $co-color__fg__back;
 
   &__text {
     @include flex-grid-size;

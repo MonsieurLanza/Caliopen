@@ -39,40 +39,55 @@
 }
 
 @mixin o-form-element--dark {
-  background-color: $co-color__fg__back--lower;
+  background-color: $co-color__contrast__back--lower;
   color: $co-color__fg__text;
 
   &:focus {
-    background-color: $co-color__fg__back--lower;
-    color: $co-color__fg__text;
+    background-color: $co-color__contrast__back--lower;
+    color: $co-color__contrast__text;
   }
 
-  &:disabled { background: $co-color__fg__back--high; }
+  &:disabled { background: $co-color__contrast__back--high; }
 
   // ::placeholder
   &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-    color: rgba($co-color__fg__text--lower, 0.8);
+    color: rgba($co-color__contrast__text--lower, 0.8);
   }
   &::-moz-placeholder { /* Firefox 19+ */
-    color: rgba($co-color__fg__text--lower, 0.8);
+    color: rgba($co-color__contrast__text--lower, 0.8);
   }
   &:-ms-input-placeholder { /* IE 10+ */
-    color: rgba($co-color__fg__text--lower, 0.8);
+    color: rgba($co-color__contrast__text--lower, 0.8);
   }
   &:-moz-placeholder { /* Firefox 18- */
-    color: rgba($co-color__fg__text--lower, 0.8);
+    color: rgba($co-color__contrast__text--lower, 0.8);
   }
 
 }
 
 @mixin o-form-element--light {
-  border-color: $co-color__contrast__border;
-  background-color: $co-color__contrast__back--low;
-  color: $co-color__contrast__text--low;
+  border-bottom: 2px solid transparent;
+  background-color: $co-color__bg__back--higher;
+  color: $co-color__fg__text--low;
 
   &:focus {
-    border-color: $co-color__contrast__border--low;
-    background-color: $co-color__contrast__back--high;
-    color: $co-color__contrast__text;
+    border-color: $co-color__primary;
+    color: $co-color__fg__text;
+  }
+
+  &:disabled { background: $co-color__fg__back--low; }
+
+  // ::placeholder
+  &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: rgba($co-color__fg__text--low, 0.8);
+  }
+  &::-moz-placeholder { /* Firefox 19+ */
+    color: rgba($co-color__fg__text--low, 0.8);
+  }
+  &:-ms-input-placeholder { /* IE 10+ */
+    color: rgba($co-color__fg__text--low, 0.8);
+  }
+  &:-moz-placeholder { /* Firefox 18- */
+    color: rgba($co-color__fg__text--low, 0.8);
   }
 }

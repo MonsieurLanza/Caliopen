@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Swipeable from 'react-swipeable';
 import classnames from 'classnames';
 import { Trans } from 'lingui-react';
-import Button from '../../../../components/Button';
 import Modal from '../../../../components/Modal';
 import { ManageEntityTags } from '../../../../modules/tags';
 
@@ -19,8 +17,6 @@ class MessageItemContainer extends Component {
   };
 
   state = {
-    isActive: false,
-    isSwiped: false,
     isTagModalOpen: false,
   };
 
@@ -82,31 +78,6 @@ class MessageItemContainer extends Component {
     });
   }
 
-  renderActions= () => {
-    const { message } = this.props;
-    const actionsClassName = classnames(
-      'm-message-item-container__actions',
-      { 'm-message-item-container__actions--swiped': this.state.isSwiped },
-      { 'm-message-item-container__actions--hover': this.state.isActive },
-    );
-
-    return (
-      <div className={actionsClassName}>
-        <Button shape="plain" className="m-message-item-container__action" onClick={this.handleDelete}>
-          <Trans id="message-item.action.delete">Delete</Trans>
-        </Button>
-        {!message.is_draft && (<Button shape="plain" className="m-message-item-container__action" onClick={this.handleReply}>
-          <Trans id="message-item.action.reply">Reply</Trans>
-        </Button>)}
-        <Button shape="plain" className="m-message-item-container__action" onClick={this.handleOpenTags}>
-          <Trans id="message-item.action.manage_tags">Manage tags</Trans>
-        </Button>
-        {this.renderTagsModal()}
-      </div>
-    );
-  }
-
-
   renderTagsModal = () => {
     const { message, i18n } = this.props;
     const nb = message.tags ? message.tags.length : 0;
@@ -137,19 +108,14 @@ class MessageItemContainer extends Component {
     const { children } = this.props;
 
     return (
-      <Swipeable
-        onSwipingLeft={this.handleSwipeLeft}
-        onSwipingRight={this.handleSwipeRight}
-        onMouseOver={this.state.isSwiped ? null : this.handleHover}
-        onMouseOut={this.state.isSwiped ? null : this.handleBlur}
+      <div
         className={classnames(
           'm-message-item-container',
           { 'm-message-item-container--active': this.state.isActive },
         )}
       >
         {children}
-        {this.renderActions()}
-      </Swipeable>
+      </div>
     );
   }
 }

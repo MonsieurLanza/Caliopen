@@ -8,7 +8,7 @@
 
   &__file {
     @include flex-grid-row;
-    @include o-form-element--dark;
+    @include o-form-element--light;
     margin-top: $co-margin;
     line-height: $co-component__height;
 

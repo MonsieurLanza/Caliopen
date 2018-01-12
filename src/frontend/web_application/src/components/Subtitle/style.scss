@@ -10,7 +10,7 @@ $m-subtitle__height: $co-component__height !default;
 
   &__text {
     display: inline;
-    color: $co-color__fg__text--lower;
+    color: $co-color__fg__text;
     font-size: 1rem;
     font-weight: bold;
   }
@@ -18,7 +18,6 @@ $m-subtitle__height: $co-component__height !default;
   &--hr {
     border-width: 1px 0;
     border-style: solid;
-    border-color: $co-color__fg__border--lower;
-    background-color: lighten($co-color__bg__back--higher, 10%);
+    border-color: $co-color__fg__border;
   }
 }

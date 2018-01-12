@@ -1,20 +1,23 @@
 @import '../../../../../../../../styles/common';
 
 $m-navbar-item__content--max-width: 12rem !default;
-$m-navbar-item--border-bottom-size: .25rem !default;
-$m-navbar-item--height: $co-component__height + $m-navbar-item--border-bottom-size !default;
+$m-navbar-item--border-top-size: .25rem !default;
+$m-navbar-item--height: $co-component__height + $m-navbar-item--border-top-size !default;
 
 .m-navbar-item {
   display: flex;
   height: $m-navbar-item--height;
   margin-right: .25rem;
-  border-bottom: $m-navbar-item--border-bottom-size solid  $co-color__bg__back;
-  background-color: $co-color__fg__back;
-  color: $co-color__fg__text--low;
+  border-top: $m-navbar-item--border-top-size solid $co-color__bg__back;
+  background-color: #f1faff;
+  color: $co-color__fg__text;
+  font-weight: 600;
+  text-transform: uppercase;
 
   &--is-active {
-    border-bottom-color: transparent;
-    color: $co-color__fg__text--higher;
+    border-top-color: $co-color__primary--low;
+    background: $co-color__fg__back;
+    color: $co-color__primary--lower;
   }
 
   &--last {

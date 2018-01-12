@@ -10,7 +10,7 @@
   &__top-bar {
     @include flex-grid-row($size: expand);
     align-items: center;
-    background: $co-color__fg__back--higher;
+    background: $co-color__fg__back;
   }
 
   &__top-bar-info {
@@ -65,13 +65,13 @@
   &__bottom-bar {
     @include flex-grid-row($size: expand);
     padding: 2 * $co-component__spacing $co-component__spacing;
-    background-color: $co-color__fg__back--high;
+    background-color: $co-color__fg__back;
   }
 
   &__bottom-action {
     @include flex-grid-size(shrink);
     margin-right: $co-component__spacing;
-    background-color: $co-color__fg__back--higher;
+    background-color: $co-color__fg__back;
 
     &--editor {
       margin-right: 0;

@@ -16,7 +16,6 @@
     @include o-form-element-select;
   }
 
-  &,
   &--dark {
     &__select-wrapper,
     &__select {
@@ -24,6 +23,7 @@
     }
   }
 
+  &,
   &--light {
     &__select-wrapper,
     &__select {

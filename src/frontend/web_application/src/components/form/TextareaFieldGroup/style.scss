@@ -15,11 +15,11 @@
     margin-top: map-get($co-form__spacing, 'medium');
   }
 
-  &,
   &--dark {
     &__textarea { @include o-form-element--dark; }
   }
 
+  &,
   &--light {
     &__textarea { @include o-form-element--light; }
   }
