@@ -11,12 +11,12 @@ describe('Discussions', () => {
     browser.get('/')
       .then(() => {
         const appSwitcher = element(by.css('.m-application-switcher'));
-        expect(appSwitcher.element(by.cssContainingText('.m-navbar-item__content', 'Messages')).isPresent())
+        expect(appSwitcher.element(by.cssContainingText('.m-navbar-item__content', 'MESSAGES')).isPresent())
         .toBe(true);
       })
       .then(() => browser.wait(EC.presenceOf($('.s-timeline .s-message-item')), 5 * 1000))
       .then(() => {
-        expect(element.all(by.css('.s-timeline .s-message-item')).first().getText())
+        expect(element.all(by.css('.s-timeline .s-message-item .s-message-item__title-subject')).first().getText())
           .toContain('Fry! Stay back! He\'s too powerful!');
         expect(element.all(by.css('.s-message-item')).count()).toEqual(7);
         expect(
@@ -30,8 +30,8 @@ describe('Discussions', () => {
       browser.get('/');
       browser.wait(EC.presenceOf($('.s-timeline .s-message-item')), 5 * 1000);
       element(by.cssContainingText(
-        '.s-message-item',
-        'zoidberg (zoidberg@planet-express.tld)'
+        '.s-message-item .s-message-item__title-subject',
+        'Fry! Stay back! He\'s too powerful!'
       )).click();
       // TODO tabs
       // expect(element(by.css('.m-tab.m-navbar__item--is-active .m-tab__link')).getText())

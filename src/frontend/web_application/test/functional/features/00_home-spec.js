@@ -20,7 +20,7 @@ describe('Home', () => {
     it('Log In', () => {
       userUtil.signin();
       browser.get('/');
-      expect(element(by.css('.m-application-switcher .m-navbar-item__content')).getText()).toContain('Messages');
+      expect(element(by.css('.m-application-switcher .m-navbar-item__content')).getText()).toContain('MESSAGES');
     });
 
     it('Requires authentication', () => {
