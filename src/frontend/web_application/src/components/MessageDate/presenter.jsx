@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'moment';
-import TextBlock from '../TextBlock';
+import './style.scss';
 
 class MessageDate extends PureComponent {
   static propTypes = {
@@ -18,9 +18,8 @@ class MessageDate extends PureComponent {
         title={dateTime.format('LLL')}
         dateTime={dateTime.format('')}
       >
-        <TextBlock inline>{dateTime.format('ll')}</TextBlock>
-        {' '}
-        <TextBlock inline>{dateTime.format('LT')}</TextBlock>
+        <span className="m-message-date__date">{dateTime.format('L')}</span>
+        <span className="m-message-date__time">{dateTime.format('LT')}</span>
       </time>
     );
   }

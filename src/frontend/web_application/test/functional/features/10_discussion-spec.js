@@ -10,9 +10,7 @@ describe('Discussions', () => {
   it('list', () => {
     browser.get('/')
       .then(() => {
-        const appSwitcher = element(by.css('.m-application-switcher'));
-        expect(appSwitcher.element(by.cssContainingText('.m-navbar-item__content', 'MESSAGES')).isPresent())
-        .toBe(true);
+        expect(element(by.css('.m-application-switcher .m-navbar-item__content')).getText()).toContain('MESSAGES');
       })
       .then(() => browser.wait(EC.presenceOf($('.s-timeline .s-message-item')), 5 * 1000))
       .then(() => {

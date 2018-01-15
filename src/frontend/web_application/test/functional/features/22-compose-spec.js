@@ -5,11 +5,11 @@ describe('Compose new message', () => {
   const locale = 'en';
   const __ = key => ({
     fr: {
-      Compose: 'Écrire',
+      Compose: 'ÉCRIRE',
       save: 'Sauvegarder',
     },
     en: {
-      Compose: 'Compose',
+      Compose: 'COMPOSE',
       save: 'Save',
     },
   }[locale][key]);

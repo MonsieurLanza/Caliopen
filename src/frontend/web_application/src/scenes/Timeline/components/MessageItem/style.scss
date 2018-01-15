@@ -1,11 +1,16 @@
 @import '../../../../styles/common';
 @import '../../../../styles/vendor/bootstrap_foundation-sites';
 
+$s-message-item__pi-width: 7px;
+
 .s-message-item {
   @include flex-grid-row($size: expand);
   align-items: center;
   min-height: $co-component__height;
   background-color: $co-color__fg__back--low;
+  padding-top: $co-component__spacing;
+  padding-bottom: $co-component__spacing;
+  font-size: $co-font__size--small;
 
   &::before {
     display: block;
@@ -13,8 +18,8 @@
     position: absolute;
     top: 0;
     bottom: 0;
-    width: 7px;
-    background: transparent;
+    width: $s-message-item__pi-width;
+    background: map-get($privacy-palette, 'disabled');
   }
 
   &--pi-ugly {
@@ -45,15 +50,15 @@
   &--unread {
     position: relative;
     background-color: $co-color__fg__back;
-    color: $co-color__fg__text;
   }
 
   &--is-selected {
     background-color: $co-color__bg__back--higher;
   }
 
-  &__col-avatars {
+  &__col-avatar {
     @include flex-grid-column(shrink);
+    margin-left: $s-message-item__pi-width;
   }
 
   &__col-title {
@@ -61,19 +66,27 @@
     min-width: 0; // https://github.com/zurb/foundation-sites/pull/8511
   }
 
-  &__title-content {
+  &__title {
     @include flex-grid-row($size: expand);
+    align-items: center;
   }
 
-  &__title-author {
-    @include flex-grid-column(12);
-    font-weight: 600;
+  &__author { @include flex-grid-size(12); }
+
+  &__author-name {
     color: $co-color__primary--lower;
+    font-size: $co-font__size;
+    font-weight: 600;
   }
 
-  &__title-subject {
-    @include flex-grid-column(12);
+  &__topic {
+    @include flex-grid-size(12);
+
+    &--unread { font-weight: 600; }
   }
+
+  &__subject { color: $co-color__fg__text--lower; }
+  &__excerpt { color: $co-color__fg__text--high; }
 
   &__col-file {
     @include flex-grid-column(shrink);
@@ -81,27 +94,38 @@
   }
 
   &__col-dates {
-    @include flex-grid-size(2);
+    @include flex-grid-column(shrink);
+    color: $co-color__fg__text--high;
     text-align: right;
+
+    &--unread {
+      color: $co-color__fg__text--low;
+    }
   }
 
+  &__type-label { display: none; }
+
   &__col-select {
-    @include flex-grid-column(shrink);
     display: none;
+    @include flex-grid-column(shrink);
+    margin-left: auto;
   }
 
   @include breakpoint(medium) {
+    padding-top: 0;
+    padding-bottom: 0;
+
     &__col-select,
-    &__col-file { display: block; }
-
-    &__title-author {
-      @include flex-grid-size(shrink);
-      padding-right: 0;
-      padding-left: 0;
+    &__col-file {
+      display: block;
     }
 
-    &__title-subject {
-      @include flex-grid-column;
-    }
+    &__topic { @include flex-grid-column; }
+
+    &__col-dates { @include flex-grid-size(shrink); }
+
+    &__author { @include flex-grid-size(shrink); }
+
+    &__type-label { display: inline }
   }
 }

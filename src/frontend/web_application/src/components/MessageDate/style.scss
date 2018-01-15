@@ -1,0 +1,13 @@
+@import '../../styles/common';
+@import '../../styles/vendor/bootstrap_foundation-sites';
+
+.m-message-date {
+  &__time { display: block; }
+
+  @include breakpoint(medium) {
+    &__time {
+      display: inline;
+      margin-left: $co-component__spacing;
+    }
+  }
+}

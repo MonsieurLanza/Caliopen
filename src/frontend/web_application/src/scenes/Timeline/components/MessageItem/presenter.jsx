@@ -47,18 +47,20 @@ class MessageItem extends Component {
       || (!isMessageFromUser && message.date_insert);
     const msgDate = isMessageFromUser && !message.is_draft ? message.date : message.date_insert;
 
-    return (
-      <TextBlock className="s-message-item__col-dates">
-        {hasDate &&
-          <Moment className="m-message__date" locale={locale} element={MessageDate}>
-            {msgDate}
-          </Moment>
-        }
+
+    return hasDate && (
+      <TextBlock>
+        {this.renderType()}
+        {' '}
+        <Moment locale={locale} element={MessageDate}>
+          {msgDate}
+        </Moment>
       </TextBlock>
     );
   }
 
-  renderTags = () => {
+  renderTags() {
+    // TODO: define render of tags in new UI
     const { userTags, message, i18n } = this.props;
 
     return message.tags && getCleanedTagCollection(userTags, message.tags).map(tag => (
@@ -69,30 +71,52 @@ class MessageItem extends Component {
     ));
   }
 
+
   renderTitle = () => {
     const { message } = this.props;
     const hash = message.is_draft ? 'reply' : message.message_id;
 
     return (
-      <div className="s-message-item__title-content" >
-        <TextBlock className="s-message-item__title-author">
-          {this.renderAuthor()}
-          {this.renderTags()}
+      <span className="s-message-item__title">
+        <TextBlock className="s-message-item__author">
+          <span className="s-message-item__author-name">{this.renderAuthor()}</span>
         </TextBlock>
-        <TextBlock className="s-message-item__title-subject">
+        <TextBlock className={classnames(
+          's-message-item__topic', { 's-message-item__topic--unread': message.is_unread })}
+        >
           <Link to={`/discussions/${message.discussion_id}#${hash}`} noDecoration >
             {message.is_draft && (<span className="s-message-item__draft-prefix"><Trans id="timeline.draft-prefix">Draft in progress:</Trans></span>)}
-            {message.subject && (<span className="s-message-item__subject">{message.subject}</span>)}
-            {message.excerpt}
+            {message.subject && (<span className="s-message-item__subject">{message.subject}{' '}</span>)}
+            <span className="s-message-item__excerpt">{message.excerpt}</span>)
           </Link>
         </TextBlock>
-      </div>
+      </span>
+    );
+  }
+
+  renderType = () => {
+    const { i18n, message } = this.props;
+    const typeTranslations = {
+      email: i18n._('message-list.message.protocol.email', { defaults: 'email' }),
+    };
+
+    const messageType = message.type && typeTranslations[message.type];
+
+    return message.type && (
+      <span className="s-message-item__type">
+        <Icon type={message.type} spaced className="s-message-item__type-icon" />
+        <span className="s-message-item__type-label">
+          {messageType}
+          {' '}
+          <Trans id="message-list.message.received-on">received on</Trans>
+        </span>
+      </span>
     );
   }
 
   render() {
     const { message } = this.props;
-    const { pi } = message;
+    const { /* pi, */attachments } = message;
 
     return (
       <MessageItemContainer message={message}>
@@ -103,22 +127,29 @@ class MessageItem extends Component {
                 's-message-item--unread': message.is_unread,
                 's-message-item--draft': message.is_draft,
                 's-message-item--is-selected': this.state.isSelected,
-                's-message-item--pi-super': pi.context >= 90,
-                's-message-item--pi-good': pi.context >= 50 && pi.context < 90,
-                's-message-item--pi-bad': pi.context >= 25 && pi.context < 50,
-                's-message-item--pi-ugly': pi.context >= 0 && pi.context < 25,
+                // TODO: define how to compute PIs for rendering
+                // 's-message-item--pi-super': pi.context >= 90,
+                // 's-message-item--pi-good': pi.context >= 50 && pi.context < 90,
+                // 's-message-item--pi-bad': pi.context >= 25 && pi.context < 50,
+                // 's-message-item--pi-ugly': pi.context >= 0 && pi.context < 25,
               })}
         >
-          <div className="s-message-item__col-avatars">
+          <div className="s-message-item__col-avatar">
             <AuthorAvatar message={message} />
           </div>
           <div className="s-message-item__col-title">
             {this.renderTitle()}
           </div>
           <div className="s-message-item__col-file">
-            { message.attachments && <Icon type="paperclip" /> }
+            { attachments.length !== 0 && <Icon type="paperclip" /> }
           </div>
-          {this.renderDate()}
+          <div className={classnames(
+            's-message-item__col-dates',
+            { 's-message-item__col-dates--unread': message.is_unread }
+            )}
+          >
+            {this.renderDate()}
+          </div>
           <div className="s-message-item__col-select">
             <input type="checkbox" onChange={this.onCheckboxChange} />
           </div>
