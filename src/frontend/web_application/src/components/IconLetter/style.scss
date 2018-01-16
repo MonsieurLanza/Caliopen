@@ -7,6 +7,12 @@
   }
 }
 
+.m-letter--checked {
+  &::before {
+    content: '✓';
+  }
+}
+
 .m-letter--plus {
   &::before {
     content: '+';
