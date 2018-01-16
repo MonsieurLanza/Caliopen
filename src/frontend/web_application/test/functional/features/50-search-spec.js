@@ -11,7 +11,7 @@ describe('search', () => {
       msg_link: 'Message',
     },
     en: {
-      tab_label_foobar: 'Results for: Foobar',
+      tab_label_foobar: 'RESULTS FOR: FOOBAR',
       msg_label_foobar: '2 messages contains "Foobar" in their subject or content',
       contact_label_foobar: '0 contacts contains "Foobar" in their label or profile',
       msg_link: 'Message',

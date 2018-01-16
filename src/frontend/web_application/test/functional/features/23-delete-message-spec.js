@@ -18,7 +18,7 @@ describe('Delete message', () => {
 
   it('delete message one by one', () => {
     const discussion1Selector = by.cssContainingText(
-      '.s-timeline .s-message-item',
+      '.s-timeline .s-message-item .s-message-item__topic .s-message-item__excerpt',
       'last message to remove individually'
     );
     const message1ToDel = 'first message to remove individually';
@@ -44,7 +44,7 @@ describe('Delete message', () => {
 
   it('delete all messages of a collection', () => {
     const discussionSelector = by.cssContainingText(
-      '.s-timeline .s-message-item',
+      '.s-timeline .s-message-item .s-message-item__topic .s-message-item__excerpt',
       'a message of a collection to remove'
     );
 

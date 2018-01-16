@@ -46,7 +46,7 @@ describe('tag', () => {
 
   it('manage tags on a message of a discussion', () => {
     browser.wait(EC.presenceOf($('.s-timeline .s-message-item')), 5 * 1000)
-      .then(() => element(by.cssContainingText('.s-timeline .s-message-item .s-message-item__title-subject', subject)).click())
+      .then(() => element(by.cssContainingText('.s-timeline .s-message-item .s-message-item__topic .s-message-item__subject', subject)).click())
       .then(() => browser.wait(EC.presenceOf(element(by.cssContainingText('.m-message__container', 'zoidberg@planet-express.tld'))), 5 * 1000))
       .then(() => element(by.cssContainingText('.m-message__container', 'zoidberg@planet-express.tld')).element(by.css('.m-message__actions-switcher')).click())
       .then(() => element(by.cssContainingText('.m-message-actions-container__action', __('Tags'))).click())
@@ -54,7 +54,7 @@ describe('tag', () => {
   });
 
   it('manage tags on a contact', () => {
-    switchApp('Contacts')
+    switchApp('CONTACTS')
       .then(() => browser.wait(EC.presenceOf($('.m-contact-list__contact')), 5 * 1000))
       .then(() => element(by.cssContainingText('.m-contact-list__contact', 'Bender Bending Rodriguez')).click())
       .then(() => browser.wait(EC.presenceOf(element(by.cssContainingText('.m-contact-profile__name', 'Bender Bending Rodriguez'))), 5 * 1000))

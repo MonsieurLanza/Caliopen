@@ -141,7 +141,7 @@ class MessageItem extends Component {
             {this.renderTitle()}
           </div>
           <div className="s-message-item__col-file">
-            { attachments.length !== 0 && <Icon type="paperclip" /> }
+            { attachments && attachments.length !== 0 && <Icon type="paperclip" /> }
           </div>
           <div className={classnames(
             's-message-item__col-dates',

@@ -4,12 +4,9 @@ describe('Compose new message', () => {
   const EC = protractor.ExpectedConditions;
   const locale = 'en';
   const __ = key => ({
-    fr: {
-      Compose: 'ÉCRIRE',
-      save: 'Sauvegarder',
-    },
     en: {
-      Compose: 'COMPOSE',
+      Compose: 'Compose',
+      composeTab: 'COMPOSE', // because .m-navbar-item is uppercased
       save: 'Save',
     },
   }[locale][key]);
@@ -29,7 +26,7 @@ describe('Compose new message', () => {
         .then(() => element(writeButtonSelector).click())
         .then(() => browser.wait(EC.presenceOf($('.m-new-draft')), 1000))
         .then(() => element.all(by.css('.m-navbar-item .m-item-link'))
-          .filter(item => item.getText().then(text => text === __('Compose'))))
+          .filter(item => item.getText().then(text => text === __('composeTab'))))
         .then(items => expect(items.length).toEqual(1))
         .then(() => {
           console.log('write msg');
@@ -40,7 +37,7 @@ describe('Compose new message', () => {
         .then(() => browser.wait(EC.presenceOf($('.m-new-draft')), 1000))
         .then(() => expect(element(by.css('.m-discussion-textarea__body')).getText()).not.toEqual(text1))
         .then(() => element.all(by.css('.m-navbar-item .m-item-link'))
-          .filter(item => item.getText().then(text => text === __('Compose'))))
+          .filter(item => item.getText().then(text => text === __('composeTab'))))
         .then((items) => {
           expect(items.length).toEqual(2);
 
@@ -65,7 +62,7 @@ describe('Compose new message', () => {
         .then(() => element(writeButtonSelector).click())
         .then(() => browser.wait(EC.presenceOf($('.m-new-draft')), 1000))
         .then(() =>
-          expect(element(by.cssContainingText('.m-navbar-item', __('Compose'))).isPresent())
+          expect(element(by.cssContainingText('.m-navbar-item', __('composeTab'))).isPresent())
             .toEqual(true)
         )
         .then(() => {
@@ -83,7 +80,7 @@ describe('Compose new message', () => {
           const draftBodyElement1 = element(by.css('.m-discussion-textarea__body'));
           expect(draftBodyElement1.getText()).toEqual(text1);
         })
-        .then(() => element(by.cssContainingText('.m-navbar-item__content', 'Messages')).click())
+        .then(() => element(by.cssContainingText('.m-navbar-item__content', 'MESSAGES')).click())
         .then(() => browser.wait(EC.presenceOf($('.s-timeline .s-message-item')), 3 * 1000))
         .then(() => expect(
           element.all(by.cssContainingText('.s-message-item__col-title', text1)).count()
@@ -196,7 +193,7 @@ describe('Compose new message', () => {
         .then(() => expect(element(dropdownSelector).isDisplayed()).toEqual(true))
         .then(() => element(by.css('.m-recipient-list__search-input')).click())
         .then(() => expect(element(dropdownSelector).isDisplayed()).toEqual(true))
-        .then(() => element(by.cssContainingText('.l-navigation__tab-list .m-navbar-item__content', __('Compose'))).click())
+        .then(() => element(by.cssContainingText('.l-navigation__tab-list .m-navbar-item__content', __('composeTab'))).click())
         .then(() => expect(element(dropdownSelector).isDisplayed()).toEqual(false))
         .then(() => expect(element(by.cssContainingText('.m-recipient-list__recipient', searchTerm)).isDisplayed()).toEqual(true))
       ;

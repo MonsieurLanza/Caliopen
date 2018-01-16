@@ -7,7 +7,6 @@
   @include breakpoint(medium) {
     &__time {
       display: inline;
-      margin-left: $co-component__spacing;
     }
   }
 }

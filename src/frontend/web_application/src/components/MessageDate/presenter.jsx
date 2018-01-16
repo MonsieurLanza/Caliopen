@@ -19,6 +19,7 @@ class MessageDate extends PureComponent {
         dateTime={dateTime.format('')}
       >
         <span className="m-message-date__date">{dateTime.format('L')}</span>
+        {' '}
         <span className="m-message-date__time">{dateTime.format('LT')}</span>
       </time>
     );

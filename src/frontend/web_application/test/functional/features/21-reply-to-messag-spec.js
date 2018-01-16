@@ -26,7 +26,7 @@ describe('Save a draft and send', () => {
 
   it('Automatically saves a draft', () => {
     const discussion1Selector = by.cssContainingText(
-      '.s-timeline .s-message-item .s-message-item__title-subject',
+      '.s-timeline .s-message-item .s-message-item__topic .s-message-item__excerpt',
       'Fry! Stay back! He\'s too powerful!'
     );
     const text1 = 'Automatically saves a draft, then refresh.';
@@ -67,11 +67,11 @@ describe('Save a draft and send', () => {
 
   it('Automatically saves a draft while browsing', () => {
     const discussion1Selector = by.cssContainingText(
-      '.s-timeline .s-message-item .s-message-item__title-subject',
+      '.s-timeline .s-message-item .s-message-item__topic .s-message-item__excerpt',
       'Fry! Stay back! He\'s too powerful!'
     );
     const discussion2Selector = by.cssContainingText(
-      '.s-timeline .s-message-item .s-message-item__title-subject',
+      '.s-timeline .s-message-item .s-message-item__topic .s-message-item__subject',
       'Shut up and take my money'
     );
     const text3 = 'Add an answer to second discussion, don\'t wait and go to first one.';
@@ -111,7 +111,7 @@ describe('Save a draft and send', () => {
 
   it('force saves a draft', () => {
     const discussion1Selector = by.cssContainingText(
-      '.s-timeline .s-message-item .s-message-item__title-subject',
+      '.s-timeline .s-message-item .s-message-item__topic .s-message-item__excerpt',
       'Fry! Stay back! He\'s too powerful!'
     );
     const text1 = 'Force save a draft.';
@@ -140,7 +140,7 @@ describe('Save a draft and send', () => {
 
   it('sends a draft', () => {
     const discussion1Selector = by.cssContainingText(
-      '.s-timeline .s-message-item .s-message-item__title-subject',
+      '.s-timeline .s-message-item .s-message-item__topic .s-message-item__excerpt',
       'Fry! Stay back! He\'s too powerful!'
     );
     const text1 = 'yes I am!';
