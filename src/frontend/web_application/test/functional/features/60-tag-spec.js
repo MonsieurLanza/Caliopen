@@ -54,7 +54,7 @@ describe('tag', () => {
   });
 
   it('manage tags on a contact', () => {
-    switchApp('CONTACTS')
+    switchApp('Contacts')
       .then(() => browser.wait(EC.presenceOf($('.m-contact-list__contact')), 5 * 1000))
       .then(() => element(by.cssContainingText('.m-contact-list__contact', 'Bender Bending Rodriguez')).click())
       .then(() => browser.wait(EC.presenceOf(element(by.cssContainingText('.m-contact-profile__name', 'Bender Bending Rodriguez'))), 5 * 1000))

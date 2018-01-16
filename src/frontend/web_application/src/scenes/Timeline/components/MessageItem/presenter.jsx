@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import { v1 as uuidV1 } from 'uuid';
 import Moment from 'react-moment';
 import { Trans } from 'lingui-react';
 import Link from '../../../../components/Link';
@@ -23,16 +24,29 @@ class MessageItem extends Component {
     settings: PropTypes.shape({}).isRequired,
     isMessageFromUser: PropTypes.bool.isRequired,
     userTags: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+    onSelectMessage: PropTypes.func,
+  };
+
+  static defaultProps = {
+    onSelectMessage: str => str,
   };
 
   state = {
     isSelected: false,
   }
 
-  onCheckboxChange = () => {
-    this.setState(prevState => ({
-      isSelected: !prevState.isSelected,
-    }));
+  onCheckboxChange = (ev) => {
+    const { message, onSelectMessage } = this.props;
+    const { checked } = ev.target;
+
+    this.setState((prevState) => {
+      onSelectMessage(checked ? 'add' : 'remove', message.message_id);
+
+      return {
+        ...prevState,
+        isSelected: checked,
+      };
+    });
   }
 
   renderAuthor = () => {
@@ -117,6 +131,7 @@ class MessageItem extends Component {
   render() {
     const { message } = this.props;
     const { /* pi, */attachments } = message;
+    const id = uuidV1();
 
     return (
       <MessageItemContainer message={message}>
@@ -135,7 +150,9 @@ class MessageItem extends Component {
               })}
         >
           <div className="s-message-item__col-avatar">
-            <AuthorAvatar message={message} />
+            <label htmlFor={id}>
+              <AuthorAvatar message={message} isSelected={this.state.isSelected} />
+            </label>
           </div>
           <div className="s-message-item__col-title">
             {this.renderTitle()}
@@ -151,7 +168,7 @@ class MessageItem extends Component {
             {this.renderDate()}
           </div>
           <div className="s-message-item__col-select">
-            <input type="checkbox" onChange={this.onCheckboxChange} />
+            <input type="checkbox" onChange={this.onCheckboxChange} id={id} />
           </div>
         </div>
       </MessageItemContainer>

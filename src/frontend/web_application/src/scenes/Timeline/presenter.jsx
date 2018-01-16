@@ -60,6 +60,20 @@ class Timeline extends Component {
     }
   }
 
+  onSelectMessage = (type, messageId) => {
+    if (type === 'add') {
+      this.setState(prevState => ({
+        selectedMessages: [...prevState.selectedMessages, messageId],
+      }));
+    }
+
+    if (type === 'remove') {
+      this.setState(prevState => ({
+        selectedMessages: [...prevState.selectedMessages].filter(item => item !== messageId),
+      }));
+    }
+  }
+
   loadMore = () => {
     if (this.props.hasMore) {
       this.throttledLoadMore();
@@ -77,7 +91,7 @@ class Timeline extends Component {
             userTags={userTags}
             isMessageFromUser={(user && isMessageFromUser(message, user)) || false}
             message={message}
-            // isSelected={}
+            onSelectMessage={this.onSelectMessage}
           />
         ))}
       </BlockList>
@@ -93,7 +107,10 @@ class Timeline extends Component {
         <MenuBar className="s-timeline__menu-bar">
           <Spinner isLoading={isFetching} className="s-timeline__spinner" />
           <div className="s-timeline__col-selector">
-            <MessageSelector />
+            <MessageSelector
+              indeterminate={this.state.selectedMessages.length !== 0}
+              count={this.state.selectedMessages.length}
+            />
           </div>
         </MenuBar>
         <InfiniteScroll onReachBottom={this.loadMore}>
