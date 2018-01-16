@@ -8,6 +8,7 @@ import Button from '../../components/Button';
 import BlockList from '../../components/BlockList';
 import InfiniteScroll from '../../components/InfiniteScroll';
 import MenuBar from '../../components/MenuBar';
+import MessageSelector from './components/MessageSelector';
 import MessageItem from './components/MessageItem';
 import { isMessageFromUser } from '../../services/message';
 import { WithTags } from '../../modules/tags';
@@ -37,6 +38,10 @@ class Timeline extends Component {
     hasMore: false,
   };
 
+  state= {
+    selectedMessages: [],
+  }
+
   componentDidMount() {
     const { requestMessages, timelineFilter, loadMore } = this.props;
     requestMessages(timelineFilter);
@@ -61,7 +66,7 @@ class Timeline extends Component {
     }
   }
 
-  renderList({ userTags }) {
+  renderList = ({ userTags }) => {
     const { user, messages } = this.props;
 
     return (
@@ -72,6 +77,7 @@ class Timeline extends Component {
             userTags={userTags}
             isMessageFromUser={(user && isMessageFromUser(message, user)) || false}
             message={message}
+            // isSelected={}
           />
         ))}
       </BlockList>
@@ -86,6 +92,9 @@ class Timeline extends Component {
         <PageTitle title={i18n._('header.menu.discussions', { defaults: 'Messages' })} />
         <MenuBar className="s-timeline__menu-bar">
           <Spinner isLoading={isFetching} className="s-timeline__spinner" />
+          <div className="s-timeline__col-selector">
+            <MessageSelector />
+          </div>
         </MenuBar>
         <InfiniteScroll onReachBottom={this.loadMore}>
           <WithTags render={userTags => this.renderList({ userTags })} />

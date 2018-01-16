@@ -1,11 +1,6 @@
 @import '../../styles/vendor/bootstrap_foundation-sites';
 
 .m-menu-bar {
-  padding: $co-component__spacing;
-  border-bottom: 1px solid $co-color__bg__back;
+  border-bottom: 1px solid $co-color__fg__border--high;
   background: $co-color__fg__back;
-
-  @include breakpoint(medium) {
-    padding-top: 0;
-  }
 }

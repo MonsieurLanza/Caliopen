@@ -1,13 +1,19 @@
-@import '../../styles/common';
+@import '../../styles/vendor/bootstrap_foundation-sites';
 
 .s-timeline {
 
   &__menu-bar {
-    height: $co-component__height;
+    @include flex-grid-row($size: expand);
+    align-items: center;
   }
 
   &__spinner {
-    float: right;
+    @include flex-grid-size(shrink);
+  }
+
+  &__col-selector {
+    @include flex-grid-size(shrink);
+    margin-left: auto;
   }
 
   &__load-more {

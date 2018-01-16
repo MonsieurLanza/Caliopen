@@ -1,0 +1,24 @@
+@import '../../../../styles/vendor/bootstrap_foundation-sites';
+
+.m-message-selector {
+
+    @include flex-grid-row($size: expand);
+    align-items: center;
+    height: $co-component__height;
+    background-color: $co-color__bg__back--higher;
+
+  &__title,
+  &__checkbox {
+    @include flex-grid-column(shrink);
+  }
+
+  &__title {
+    color: $co-color__primary--lower;
+    font-weight: 700;
+    font-size: $co-font__size--xsmall;
+  }
+
+  &__actions {
+    @include flex-grid-size(shrink);
+  }
+}
