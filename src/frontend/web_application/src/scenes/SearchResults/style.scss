@@ -1,21 +1,20 @@
 @import '../../styles/common';
 
 .s-search-results {
+  background: $co-color__fg__back;
+
   &__label {
     padding: map-get($co-form__spacing, 'small') map-get($co-form__spacing, 'medium');
-    color: $co-color__fg__text--high;
+    border-bottom: 1px solid $co-color__fg__border--higher;
+    color: $co-color__fg__text--low;
+    font-weight: 600;
   }
 
   &__link {
-    margin-left: $co-margin;
-    color: $co-color__primary--high;
+    color: $co-color__primary--lower;
 
     &:hover {
-      color: $co-color__primary--high;
+      color: $co-color__primary--low;
     }
-  }
-
-  &__item {
-    background: $co-color__fg__back;
   }
 }

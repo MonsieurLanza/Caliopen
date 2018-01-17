@@ -7,6 +7,7 @@ import SearchResultsLayout from '../../layouts/SearchResults';
 import Link from '../../components/Link';
 import PageTitle from '../../components/PageTitle';
 import Button from '../../components/Button';
+import BlockList from '../../components/BlockList';
 import InfiniteScroll from '../../components/InfiniteScroll';
 import MessageResultItem from './components/MessageResultItem';
 import ContactResultItem from './components/ContactResultItem';
@@ -72,7 +73,7 @@ class SearchResults extends Component {
 
     return (
       <WithSettings render={({ default_locale: locale }) => (
-        <div className="s-search-results__item">
+        <BlockList className="s-search-results__item">
           {messages.map(messageHit => (
             <MessageResultItem
               locale={locale}
@@ -82,7 +83,7 @@ class SearchResults extends Component {
               term={term}
             />
           ))}
-        </div>
+        </BlockList>
       )}
       />
     );
@@ -92,7 +93,7 @@ class SearchResults extends Component {
     const { term } = this.props;
 
     return (
-      <div className="s-search-results__item">
+      <BlockList className="s-search-results__item">
         {contacts.map(contactHit => (
           <ContactResultItem
             key={contactHit.document.contact_id}
@@ -101,7 +102,7 @@ class SearchResults extends Component {
             term={term}
           />
         ))}
-      </div>
+      </BlockList>
     );
   }
 

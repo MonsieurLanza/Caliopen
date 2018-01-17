@@ -49,6 +49,32 @@ class MessageResultItem extends PureComponent {
     );
   }
 
+  renderTitle() {
+    const { message } = this.props;
+
+    return (
+      <span className="s-message-result-item__title">
+        <TextBlock className="s-message-result-item__author">
+          <span className="s-message-result-item__author-name">{this.renderAuthor()}</span>
+          <span className="s-message-result-item__author-tags">{' '}{this.renderTags()}</span>
+        </TextBlock>
+        <TextBlock className={classnames(
+          's-message-result-item__topic', {
+            's-message-result-item__topic--unread': message.is_unread,
+            's-message-result-item__topic--draft': message.is_draft,
+          })}
+        >
+          {message.attachments && message.attachments.length > 0 && <Icon type="paperclip" spaced />}
+          {message.is_draft && (<span className="s-message-result-item__draft-prefix"><Trans id="timeline.draft-prefix">Draft in progress:</Trans></span>)}
+          {message.subject && (<span className="s-message-result-item__subject">{message.subject}{' '}</span>)}
+        </TextBlock>
+        <TextBlock className="s-message-result-item__highlights">
+          {this.renderHighlights()}
+        </TextBlock>
+      </span>
+    );
+  }
+
   renderHighlights() {
     const { term, highlights } = this.props;
     const highlightsString = !highlights ? '' : Object.entries(highlights)
@@ -71,25 +97,14 @@ class MessageResultItem extends PureComponent {
         className={classnames('s-message-result-item', { 's-message-result-item--unread': message.is_unread, 's-message-result-item--draft': message.is_draft })}
         noDecoration
       >
-        <div className="s-message-result-item__col-avatars">
+        <div className="s-message-result-item__col-avatar">
           <AuthorAvatar message={message} />
         </div>
         <div className="s-message-result-item__col-title">
-          <TextBlock>
-            {this.renderAuthor()}
-            {this.renderTags()}
-          </TextBlock>
-          <TextBlock>
-            {message.is_draft && (<span className="s-message-result-item__draft-prefix"><Trans id="timeline.draft-prefix">Draft in progress:</Trans></span>)}
-            {message.subject && (<span className="s-message-result-item__subject">{message.subject}</span>)}
-            {this.renderHighlights()}
-          </TextBlock>
-        </div>
-        <div className="s-message-result-item__col-file">
-          { message.attachments && <Icon type="paperclip" /> }
+          {this.renderTitle()}
         </div>
         <div className="s-message-result-item__col-dates">
-          <Moment className="m-message__date" locale={locale} element={MessageDate}>
+          <Moment locale={locale} element={MessageDate}>
             {message.date_insert}
           </Moment>
         </div>
