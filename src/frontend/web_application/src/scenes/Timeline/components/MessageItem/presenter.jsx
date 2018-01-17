@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { v1 as uuidV1 } from 'uuid';
 import Moment from 'react-moment';
 import { Trans } from 'lingui-react';
 import Link from '../../../../components/Link';
@@ -25,28 +24,18 @@ class MessageItem extends Component {
     isMessageFromUser: PropTypes.bool.isRequired,
     userTags: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
     onSelectMessage: PropTypes.func,
+    isMessageSelected: PropTypes.bool.isRequired,
   };
 
   static defaultProps = {
     onSelectMessage: str => str,
   };
 
-  state = {
-    isSelected: false,
-  }
-
   onCheckboxChange = (ev) => {
     const { message, onSelectMessage } = this.props;
     const { checked } = ev.target;
 
-    this.setState((prevState) => {
-      onSelectMessage(checked ? 'add' : 'remove', message.message_id);
-
-      return {
-        ...prevState,
-        isSelected: checked,
-      };
-    });
+    onSelectMessage(checked ? 'add' : 'remove', message.message_id);
   }
 
   renderAuthor = () => {
@@ -129,9 +118,8 @@ class MessageItem extends Component {
   }
 
   render() {
-    const { message } = this.props;
+    const { message, isMessageSelected } = this.props;
     const { /* pi, */attachments } = message;
-    const id = uuidV1();
 
     return (
       <MessageItemContainer message={message}>
@@ -141,7 +129,7 @@ class MessageItem extends Component {
               {
                 's-message-item--unread': message.is_unread,
                 's-message-item--draft': message.is_draft,
-                's-message-item--is-selected': this.state.isSelected,
+                's-message-item--is-selected': isMessageSelected,
                 // TODO: define how to compute PIs for rendering
                 // 's-message-item--pi-super': pi.context >= 90,
                 // 's-message-item--pi-good': pi.context >= 50 && pi.context < 90,
@@ -150,8 +138,8 @@ class MessageItem extends Component {
               })}
         >
           <div className="s-message-item__col-avatar">
-            <label htmlFor={id}>
-              <AuthorAvatar message={message} isSelected={this.state.isSelected} />
+            <label htmlFor={message.message_id}>
+              <AuthorAvatar message={message} isSelected={isMessageSelected} />
             </label>
           </div>
           <div className="s-message-item__col-title">
@@ -168,7 +156,12 @@ class MessageItem extends Component {
             {this.renderDate()}
           </div>
           <div className="s-message-item__col-select">
-            <input type="checkbox" onChange={this.onCheckboxChange} id={id} />
+            <input
+              type="checkbox"
+              onChange={this.onCheckboxChange}
+              id={message.message_id}
+              checked={isMessageSelected}
+            />
           </div>
         </div>
       </MessageItemContainer>

@@ -9,13 +9,17 @@ class MessageSelector extends Component {
   static propTypes = {
     onSelectAllMessages: PropTypes.func,
     count: PropTypes.number,
+    totalCount: PropTypes.number,
     indeterminate: PropTypes.bool,
+    checked: PropTypes.bool,
   };
 
   static defaultProps = {
     onSelectAllMessages: str => str,
     count: 0,
+    totalCount: 0,
     indeterminate: false,
+    checked: false,
   };
 
   componentDidMount() {
@@ -28,8 +32,9 @@ class MessageSelector extends Component {
     }
   }
 
-  toggleCheckbox = () => {
-    // const { checked } = ev.target;
+  toggleCheckbox = (ev) => {
+    const { checked } = ev.target;
+    this.props.onSelectAllMessages(checked);
   }
 
   handleEditTags = () => {
@@ -39,7 +44,7 @@ class MessageSelector extends Component {
   }
 
   render() {
-    const { count } = this.props;
+    const { count, totalCount, checked } = this.props;
 
     return (
       <div className="m-message-selector">
@@ -47,9 +52,9 @@ class MessageSelector extends Component {
           <span className="m-message-selector__title">
             <Plural
               id="message-list.message.selected"
-              value={count}
-              one={<Trans># message:</Trans>}
-              other={<Trans># messages:</Trans>}
+              value={{ count, totalCount }}
+              one={<Trans>{count}/{totalCount} message:</Trans>}
+              other={<Trans>{count}/{totalCount} messages:</Trans>}
             />
           </span>
         )}
@@ -60,6 +65,7 @@ class MessageSelector extends Component {
         <span className="m-message-selector__checkbox">
           <input
             type="checkbox"
+            defaultChecked={checked}
             onChange={this.toggleCheckbox}
             ref={el => (this.selector = el)}
           />
