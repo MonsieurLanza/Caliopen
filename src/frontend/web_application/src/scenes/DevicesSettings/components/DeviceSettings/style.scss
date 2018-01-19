@@ -1,6 +1,6 @@
-@import '../../styles/common';
+@import '../../../../styles/common';
 
-.m-device {
+.m-device-settings {
   &__pi {
     padding-top: map-get($co-form__spacing, 'small');
     padding-bottom: map-get($co-form__spacing, 'small');

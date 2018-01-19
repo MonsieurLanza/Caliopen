@@ -8,7 +8,7 @@ import PageTitle from '../../components/PageTitle';
 
 import './style.scss';
 
-class Devices extends Component {
+class DevicesSettings extends Component {
   static propTypes = {
     devices: PropTypes.arrayOf(PropTypes.shape({})),
     requestDevices: PropTypes.func.isRequired,
@@ -35,7 +35,7 @@ class Devices extends Component {
       <ItemContent key={device.device_id} active={device.device_id === deviceId}>
         <Link
           to={`/settings/devices/${device.device_id}`}
-          className={classnames('s-devices__nav-item', { 's-devices__nav-item--verify': !isVerified })}
+          className={classnames('s-devices-settings__nav-item', { 's-devices-settings__nav-item--verify': !isVerified })}
           active={device.device_id === deviceId}
           expanded
         >
@@ -53,12 +53,12 @@ class Devices extends Component {
     const { devices, children, i18n } = this.props;
 
     return (
-      <div className="s-devices">
+      <div className="s-devices-settings">
         <PageTitle />
-        <NavList className="s-devices__nav" dir="vertical">
+        <NavList className="s-devices-settings__nav" dir="vertical">
           {devices.map(device => this.renderDevice(device))}
         </NavList>
-        <section className="s-devices__device">
+        <section className="s-devices-settings__device">
           {!children ? i18n._('device.no-selected-device', { defaults: 'No selected device' }) : children}
         </section>
       </div>
@@ -66,4 +66,4 @@ class Devices extends Component {
   }
 }
 
-export default Devices;
+export default DevicesSettings;

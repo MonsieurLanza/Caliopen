@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { withI18n } from 'lingui-react';
 import { requestDevices } from '../../store/modules/device';
 import Presenter from './presenter';
-import Device from './components/Device';
+import DeviceSettings from './components/DeviceSettings';
 
-export { Device };
+export { DeviceSettings };
 
 const devicesSelector = state => state.device.devices.map(id => state.device.devicesById[id]);
 const mapStateToProps = createSelector(

@@ -1,13 +1,14 @@
 import { bindActionCreators, compose } from 'redux';
 import { connect } from 'react-redux';
-import { removeDevice } from '../../../../store/modules/device';
+import { withI18n } from 'lingui-react';
+import { updateDevice } from '../../../../store/modules/device';
 import Presenter from './presenter';
-import './style.scss';
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  onRevokeDevice: removeDevice,
+  onChange: updateDevice,
 }, dispatch);
 
 export default compose(
-  connect(null, mapDispatchToProps)
+  connect(null, mapDispatchToProps),
+  withI18n()
 )(Presenter);

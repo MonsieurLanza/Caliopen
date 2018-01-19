@@ -1,7 +1,7 @@
 @import '../../styles/common';
 @import '../../styles/vendor/bootstrap_foundation-sites';
 
-.s-devices {
+.s-devices-settings {
   @include flex-grid-row($size: expand);
 
   &__nav {

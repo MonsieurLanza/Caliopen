@@ -24,16 +24,9 @@ class DeviceForm extends Component {
     i18n: PropTypes.shape({}).isRequired,
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      ...generateStateFromProps(this.props),
-    };
-    this.handleFieldChange = this.handleFieldChange.bind(this);
-    this.validateIP = this.validateIP.bind(this);
-    this.handleLocationsChange = this.handleLocationsChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  state = {
+    ...generateStateFromProps(this.props),
+  };
 
   componentWillMount() {
     this.setState(generateStateFromProps(this.props));
@@ -43,7 +36,7 @@ class DeviceForm extends Component {
     this.setState(generateStateFromProps(newProps));
   }
 
-  handleFieldChange(ev) {
+  handleFieldChange = (ev) => {
     const { name, value } = ev.target;
     this.setState(prevState => ({
       device: {
@@ -53,7 +46,7 @@ class DeviceForm extends Component {
     }));
   }
 
-  handleLocationsChange(locations) {
+  handleLocationsChange = (locations) => {
     this.setState(prevState => ({
       device: {
         ...prevState.device,
@@ -62,7 +55,7 @@ class DeviceForm extends Component {
     }));
   }
 
-  validateIP(ip) {
+  validateIP = (ip) => {
     if (/^[0-9]{1,3}(\.[-/0-9]*){1,3}$/.test(ip)) {
       return { isValid: true };
     }
@@ -72,7 +65,7 @@ class DeviceForm extends Component {
     return { isValid: false, errors: [i18n._('device.feedback.invalid_ip', { defaults: 'IP or subnet address is invalid.' })] };
   }
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     event.preventDefault();
     this.props.onChange({ device: this.state.device, original: this.props.device });
   }
