@@ -6,7 +6,7 @@ import { Trans } from 'lingui-react';
 import Link from '../../../../components/Link';
 import MessageDate from '../../../../components/MessageDate';
 import AuthorAvatar from '../../../../components/AuthorAvatar';
-import MessageItemContainer from '../MessageItemContainer';
+// import MessageItemContainer from '../MessageItemContainer';
 import Icon from '../../../../components/Icon';
 // import { CheckboxFieldGroup } from '../../../../components/form';
 import TextBlock from '../../../../components/TextBlock';
@@ -83,6 +83,7 @@ class MessageItem extends Component {
       <span className="s-message-item__title">
         <TextBlock className="s-message-item__author">
           <span className="s-message-item__author-name">{this.renderAuthor()}</span>
+          <span className="s-message-item__tags">{this.renderTags()}</span>
         </TextBlock>
         <TextBlock className={classnames(
           's-message-item__topic', { 's-message-item__topic--unread': message.is_unread })}
@@ -122,49 +123,47 @@ class MessageItem extends Component {
     const { /* pi, */attachments } = message;
 
     return (
-      <MessageItemContainer message={message}>
-        <div
-          className={
-            classnames('s-message-item',
-              {
-                's-message-item--unread': message.is_unread,
-                's-message-item--draft': message.is_draft,
-                's-message-item--is-selected': isMessageSelected,
-                // TODO: define how to compute PIs for rendering
-                // 's-message-item--pi-super': pi.context >= 90,
-                // 's-message-item--pi-good': pi.context >= 50 && pi.context < 90,
-                // 's-message-item--pi-bad': pi.context >= 25 && pi.context < 50,
-                // 's-message-item--pi-ugly': pi.context >= 0 && pi.context < 25,
-              })}
-        >
-          <div className="s-message-item__col-avatar">
-            <label htmlFor={message.message_id}>
-              <AuthorAvatar message={message} isSelected={isMessageSelected} />
-            </label>
-          </div>
-          <div className="s-message-item__col-title">
-            {this.renderTitle()}
-          </div>
-          <div className="s-message-item__col-file">
-            { attachments && attachments.length !== 0 && <Icon type="paperclip" /> }
-          </div>
-          <div className={classnames(
-            's-message-item__col-dates',
-            { 's-message-item__col-dates--unread': message.is_unread }
-            )}
-          >
-            {this.renderDate()}
-          </div>
-          <div className="s-message-item__col-select">
-            <input
-              type="checkbox"
-              onChange={this.onCheckboxChange}
-              id={message.message_id}
-              checked={isMessageSelected}
-            />
-          </div>
+      <div
+        className={
+          classnames('s-message-item',
+            {
+              's-message-item--unread': message.is_unread,
+              's-message-item--draft': message.is_draft,
+              's-message-item--is-selected': isMessageSelected,
+              // TODO: define how to compute PIs for rendering
+              // 's-message-item--pi-super': pi.context >= 90,
+              // 's-message-item--pi-good': pi.context >= 50 && pi.context < 90,
+              // 's-message-item--pi-bad': pi.context >= 25 && pi.context < 50,
+              // 's-message-item--pi-ugly': pi.context >= 0 && pi.context < 25,
+            })}
+      >
+        <div className="s-message-item__col-avatar">
+          <label htmlFor={message.message_id}>
+            <AuthorAvatar message={message} isSelected={isMessageSelected} />
+          </label>
         </div>
-      </MessageItemContainer>
+        <div className="s-message-item__col-title">
+          {this.renderTitle()}
+        </div>
+        <div className="s-message-item__col-file">
+          { attachments && attachments.length !== 0 && <Icon type="paperclip" /> }
+        </div>
+        <div className={classnames(
+          's-message-item__col-dates',
+          { 's-message-item__col-dates--unread': message.is_unread }
+          )}
+        >
+          {this.renderDate()}
+        </div>
+        <div className="s-message-item__col-select">
+          <input
+            type="checkbox"
+            onChange={this.onCheckboxChange}
+            id={message.message_id}
+            checked={isMessageSelected}
+          />
+        </div>
+      </div>
     );
   }
 }

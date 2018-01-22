@@ -10,9 +10,10 @@ $m-badge--large__font-size: $co-font__size !default;
   height: $m-badge__height;
   padding-right: .5rem;
   padding-left: .5rem;
-  background: $co-color__fg__back--low;
-  color: $co-color__fg__text--low;
-  font-size: ($m-badge__height / 2);
+  background: $co-color__primary--low;
+  color: $co-color__contrast__text;
+  font-size: $m-badge__font-size;
+  font-weight: 600;
   line-height: $m-badge__height;
   white-space: nowrap;
 
@@ -31,8 +32,8 @@ $m-badge--large__font-size: $co-font__size !default;
   }
 
   &--low {
-    background: $co-color__fg__back--lower;
-    color: $co-color__fg__text--lower;
+    background: $co-color__primary--lower;
+    color: $co-color__contrast__text--higher;
   }
 
   &--large {

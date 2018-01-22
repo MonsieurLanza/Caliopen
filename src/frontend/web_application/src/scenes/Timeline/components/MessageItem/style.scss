@@ -6,6 +6,7 @@ $s-message-item__pi-width: 7px;
 .s-message-item {
   @include flex-grid-row($size: expand);
   align-items: center;
+  position: relative;
   min-height: $co-component__height;
   background-color: $co-color__fg__back--low;
   padding-top: $co-component__spacing;

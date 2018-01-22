@@ -8,6 +8,8 @@ import './style.scss';
 class MessageSelector extends Component {
   static propTypes = {
     onSelectAllMessages: PropTypes.func,
+    onEditTags: PropTypes.func,
+    onDeleteMessages: PropTypes.func,
     count: PropTypes.number,
     totalCount: PropTypes.number,
     indeterminate: PropTypes.bool,
@@ -16,6 +18,8 @@ class MessageSelector extends Component {
 
   static defaultProps = {
     onSelectAllMessages: str => str,
+    onEditTags: str => str,
+    onDeleteMessages: str => str,
     count: 0,
     totalCount: 0,
     indeterminate: false,
@@ -38,9 +42,11 @@ class MessageSelector extends Component {
   }
 
   handleEditTags = () => {
+    this.props.onEditTags();
   }
 
   handleDelete = () => {
+    this.props.onDeleteMessages();
   }
 
   render() {
