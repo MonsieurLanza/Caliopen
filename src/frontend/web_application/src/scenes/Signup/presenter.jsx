@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { WithDevice } from '../../modules/device';
 import SignupForm from './components/SignupForm';
 import formValidator, { getLocalizedErrors, ERR_INVALID_GLOBAL } from './form-validator';
 
@@ -69,7 +70,7 @@ class Signup extends Component {
     });
   }
 
-  handleSignup = (ev) => {
+  handleSignup = ({ device }, ev) => {
     const { i18n, settings } = this.props;
     formValidator.validate(ev.formValues, i18n, 'full')
       .catch((errors) => {
@@ -79,6 +80,7 @@ class Signup extends Component {
       })
       .then(() => axios.post('/auth/signup', {
         ...ev.formValues,
+        device,
         settings,
       }, {
         headers: { 'X-Requested-With': 'XMLHttpRequest' },
@@ -124,14 +126,23 @@ class Signup extends Component {
     this.setState({ errors: { global } });
   }
 
-  render() {
+  renderForm = ({ device }) => {
+    console.log('renderForm', device);
+    const handleSignup = this.handleSignup.bind(null, { device });
+
     return (
       <SignupForm
         onUsernameChange={this.handleUsernameChange}
         onUsernameBlur={this.handleUsernameBlur}
-        onSubmit={this.handleSignup}
+        onSubmit={handleSignup}
         errors={this.state.errors}
       />
+    );
+  }
+
+  render() {
+    return (
+      <WithDevice render={this.renderForm} />
     );
   }
 }

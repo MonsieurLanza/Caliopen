@@ -1,6 +1,6 @@
 import React from 'react';
-import SwitchWithRoutes from './';
 import { shallow } from 'enzyme';
+import SwitchWithRoutes from './';
 
 describe('routing - SwitchWithRoutes', () => {
   const routes = [

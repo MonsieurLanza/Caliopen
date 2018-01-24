@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import { I18nLoader } from './modules/i18n';
 import { WithSettings } from './modules/settings';
+import { DeviceProvider } from './modules/device';
 import PageTitle from './components/PageTitle';
 import Routes from './routes';
 import I18nProviderLegacy from './components/I18nProvider';
@@ -34,7 +35,9 @@ class App extends Component {
           <I18nProviderLegacy>
             <I18nLoader locale={locale}>
               <PageTitle />
-              <Routes />
+              <DeviceProvider>
+                <Routes />
+              </DeviceProvider>
             </I18nLoader>
           </I18nProviderLegacy>
         )}

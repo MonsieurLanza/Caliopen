@@ -1,9 +1,11 @@
-import * as localStorageHelper from './local-storage-helper';
+import { getLocalstorage } from '../localStorage';
 
 const NAMESPACE = 'openpgp';
 
 export function getPrimaryKeysByFingerprint() {
-  return localStorageHelper.findAll(NAMESPACE)
+  const ls = getLocalstorage();
+
+  return ls.findAll(NAMESPACE)
     .reduce((prev, { id, value }) => {
       const fingerprint = id.replace('publicKeyArmored.', '')
         .replace('privateKeyArmored.', '');
@@ -20,11 +22,13 @@ export function getPrimaryKeysByFingerprint() {
 }
 
 export function saveKey(fingerprint, publicKeyArmored, privateKeyArmored) {
-  localStorageHelper.save(NAMESPACE, `publicKeyArmored.${fingerprint}`, publicKeyArmored);
-  localStorageHelper.save(NAMESPACE, `privateKeyArmored.${fingerprint}`, privateKeyArmored);
+  const ls = getLocalstorage();
+  ls.save(NAMESPACE, `publicKeyArmored.${fingerprint}`, publicKeyArmored);
+  ls.save(NAMESPACE, `privateKeyArmored.${fingerprint}`, privateKeyArmored);
 }
 
 export function deleteKey(fingerprint) {
-  localStorageHelper.remove(NAMESPACE, `publicKeyArmored.${fingerprint}`);
-  localStorageHelper.remove(NAMESPACE, `privateKeyArmored.${fingerprint}`);
+  const ls = getLocalstorage();
+  ls.remove(NAMESPACE, `publicKeyArmored.${fingerprint}`);
+  ls.remove(NAMESPACE, `privateKeyArmored.${fingerprint}`);
 }
