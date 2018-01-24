@@ -7,7 +7,7 @@ module.exports = {
     browser.get('/auth/signin');
     element(by.css('input[name=username]')).sendKeys(loginKeys);
     element(by.css('input[name=password]')).sendKeys(passwordKeys);
-    element(by.css('button[type=submit]')).click();
+    element(by.cssContainingText('button[type=submit]', 'I\'m in a safe place')).click();
     browser.wait(EC.not(EC.urlContains('auth/signin')), 5 * 1000);
   },
   signout: () => {
