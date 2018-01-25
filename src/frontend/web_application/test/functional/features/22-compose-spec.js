@@ -6,7 +6,6 @@ describe('Compose new message', () => {
   const __ = key => ({
     en: {
       Compose: 'Compose',
-      composeTab: 'COMPOSE', // because .m-navbar-item is uppercased
       save: 'Save',
     },
   }[locale][key]);
@@ -62,7 +61,7 @@ describe('Compose new message', () => {
         .then(() => element(writeButtonSelector).click())
         .then(() => browser.wait(EC.presenceOf($('.m-new-draft')), 1000))
         .then(() =>
-          expect(element(by.cssContainingText('.m-navbar-item', __('composeTab'))).isPresent())
+          expect(element(by.cssContainingText('.m-navbar-item', 'Compose')).isPresent())
             .toEqual(true)
         )
         .then(() => {
@@ -71,19 +70,19 @@ describe('Compose new message', () => {
           draftBodyElement1.sendKeys(text1);
         })
         .then(() => element(by.cssContainingText('button', __('save'))).click())
-
         .then(() => browser.wait(EC.presenceOf($('.m-discussion-textarea__body')), 3 * 1000))
         .then(() => expect(
           element.all(by.css('.m-discussion-textarea__body .m-recipient-list__recipient')).count()
         ).toEqual(0))
         .then(() => {
           const draftBodyElement1 = element(by.css('.m-discussion-textarea__body'));
-          expect(draftBodyElement1.getText()).toEqual(text1);
+
+          return expect(draftBodyElement1.getText()).toEqual(text1);
         })
         .then(() => element(by.cssContainingText('.m-navbar-item__content', 'Messages')).click())
         .then(() => browser.wait(EC.presenceOf($('.s-timeline .s-message-item')), 3 * 1000))
         .then(() => expect(
-          element.all(by.cssContainingText('.s-message-item__col-title', text1)).count()
+          element.all(by.cssContainingText('.s-message-item__excerpt', text1)).count()
         ).toEqual(1))
       ;
     });
@@ -193,7 +192,7 @@ describe('Compose new message', () => {
         .then(() => expect(element(dropdownSelector).isDisplayed()).toEqual(true))
         .then(() => element(by.css('.m-recipient-list__search-input')).click())
         .then(() => expect(element(dropdownSelector).isDisplayed()).toEqual(true))
-        .then(() => element(by.cssContainingText('.l-navigation__tab-list .m-navbar-item__content', __('composeTab'))).click())
+        .then(() => element(by.cssContainingText('.l-navigation__tab-list .m-navbar-item__content', 'Compose')).click())
         .then(() => expect(element(dropdownSelector).isDisplayed()).toEqual(false))
         .then(() => expect(element(by.cssContainingText('.m-recipient-list__recipient', searchTerm)).isDisplayed()).toEqual(true))
       ;
