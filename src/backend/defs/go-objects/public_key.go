@@ -11,11 +11,12 @@ import (
 	"time"
 )
 
-type PublicKey struct {
-	ContactId       UUID             `cql:"contact_id"       json:"contact_id,omitempty"                                      patch:"system"`
-	DateInsert      time.Time        `cql:"date_insert"      json:"date_insert,omitempty"         formatter:"RFC3339Milli"    patch:"system"`
-	DateUpdate      time.Time        `cql:"date_update"      json:"date_update,omitempty"         formatter:"RFC3339Milli"    patch:"system"`
-	ExpireDate      time.Time        `cql:"expire_date"      json:"expire_date,omitempty"         formatter:"RFC3339Milli"    patch:"user"`
+type ContactPublicKey struct {
+	ContactId  UUID      `cql:"contact_id"       json:"contact_id,omitempty"                                      patch:"system"`
+	DateInsert time.Time `cql:"date_insert"      json:"date_insert,omitempty"         formatter:"RFC3339Milli"    patch:"system"`
+	DateUpdate time.Time `cql:"date_update"      json:"date_update,omitempty"         formatter:"RFC3339Milli"    patch:"system"`
+	ExpireDate time.Time `cql:"expire_date"      json:"expire_date,omitempty"         formatter:"RFC3339Milli"    patch:"user"`
+	// string or []byte for fingerprint & key ?
 	Fingerprint     string           `cql:"fingerprint"      json:"fingerprint,omitempty"                                     patch:"user"`
 	Key             string           `cql:"key"              json:"key,omitempty"                                             patch:"user"`
 	Name            string           `cql:"name"             json:"name,omitempty"                                            patch:"user"`
@@ -25,9 +26,9 @@ type PublicKey struct {
 	UserId          UUID             `cql:"user_id"          json:"user_id,omitempty"                                         patch:"system"`
 }
 
-// unmarshal a map[string]interface{} that must owns all PublicKey's fields
+// unmarshal a map[string]interface{} that must owns all ContactPublicKey's fields
 // typical usage is for unmarshaling response from Cassandra backend
-func (pk *PublicKey) UnmarshalCQLMap(input map[string]interface{}) {
+func (pk *ContactPublicKey) UnmarshalCQLMap(input map[string]interface{}) {
 	if contactId, ok := input["contact_id"].(gocql.UUID); ok {
 		pk.ContactId.UnmarshalBinary(contactId.Bytes())
 	}
@@ -66,7 +67,7 @@ func (pk *PublicKey) UnmarshalCQLMap(input map[string]interface{}) {
 	}
 }
 
-func (pk *PublicKey) UnmarshalMap(input map[string]interface{}) error {
+func (pk *ContactPublicKey) UnmarshalMap(input map[string]interface{}) error {
 	if contact_id, ok := input["contact_id"].(string); ok {
 		if id, err := uuid.FromString(contact_id); err == nil {
 			pk.ContactId.UnmarshalBinary(id.Bytes())
@@ -109,7 +110,7 @@ func (pk *PublicKey) UnmarshalMap(input map[string]interface{}) error {
 	return nil //TODO : errors handling
 }
 
-func (pk *PublicKey) UnmarshalJSON(b []byte) error {
+func (pk *ContactPublicKey) UnmarshalJSON(b []byte) error {
 	input := map[string]interface{}{}
 	if err := json.Unmarshal(b, &input); err != nil {
 		return err
@@ -119,8 +120,8 @@ func (pk *PublicKey) UnmarshalJSON(b []byte) error {
 }
 
 // GetTableInfos implements HasTable interface.
-// It returns params needed by CassandraBackend to CRUD on PublicKey table.
-func (pk *PublicKey) GetTableInfos() (table string, partitionKeys map[string]string, clusteringKeys map[string]string) {
+// It returns params needed by CassandraBackend to CRUD on ContactPublicKey table.
+func (pk *ContactPublicKey) GetTableInfos() (table string, partitionKeys map[string]string, clusteringKeys map[string]string) {
 	return "public_key",
 		map[string]string{
 			"UserId":    "user_id",
@@ -133,7 +134,7 @@ func (pk *PublicKey) GetTableInfos() (table string, partitionKeys map[string]str
 		}
 }
 
-func (pk *PublicKey) MarshallNew(contacts ...interface{}) {
+func (pk *ContactPublicKey) MarshallNew(contacts ...interface{}) {
 	if len(contacts) == 1 {
 		c := contacts[0].(*Contact)
 		pk.UserId.UnmarshalBinary(c.UserId.Bytes())
@@ -148,32 +149,32 @@ func (pk *PublicKey) MarshallNew(contacts ...interface{}) {
 	}
 }
 
-// return a JSON representation of PublicKey suitable for frontend client
-func (pk *PublicKey) MarshalFrontEnd() ([]byte, error) {
+// return a JSON representation of ContactPublicKey suitable for frontend client
+func (pk *ContactPublicKey) MarshalFrontEnd() ([]byte, error) {
 	return JSONMarshaller("frontend", pk)
 }
 
-func (pk *PublicKey) JSONMarshaller() ([]byte, error) {
+func (pk *ContactPublicKey) JSONMarshaller() ([]byte, error) {
 	return JSONMarshaller("", pk)
 }
 
-func (pk *PublicKey) NewEmpty() interface{} {
-	p := new(PublicKey)
+func (pk *ContactPublicKey) NewEmpty() interface{} {
+	p := new(ContactPublicKey)
 	p.Size = 0
 	return p
 }
 
 /* ObjectPatchable interface */
-func (pk *PublicKey) JsonTags() map[string]string {
+func (pk *ContactPublicKey) JsonTags() map[string]string {
 	return jsonTags(pk)
 }
 
-func (pk *PublicKey) SortSlices() {
+func (pk *ContactPublicKey) SortSlices() {
 	// nothing to sort
 }
 
 // Sort interface implementation
-type ByName []PublicKey
+type ByName []ContactPublicKey
 
 func (p ByName) Len() int {
 	return len(p)
@@ -185,4 +186,7 @@ func (p ByName) Less(i, j int) bool {
 
 func (p ByName) Swap(i, j int) {
 	p[i], p[j] = p[j], p[i]
+}
+
+type DevicePublicKey struct {
 }

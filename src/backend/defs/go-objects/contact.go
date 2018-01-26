@@ -12,33 +12,32 @@ import (
 )
 
 type (
-	// cql_lookup tags indicate properties which are a lookup value in the specified lookup table
 	Contact struct {
-		Locker          *sync.Mutex       `cql:"-"                  json:"-"`
-		AdditionalName  string            `cql:"additional_name"    json:"additional_name,omitempty"      patch:"user"`
-		Addresses       []PostalAddress   `cql:"addresses"          json:"addresses,omitempty"            patch:"user"`
-		Avatar          string            `cql:"avatar"             json:"avatar,omitempty"               patch:"user"`
-		ContactId       UUID              `cql:"contact_id"         json:"contact_id,omitempty"   elastic:"omit"`
-		DateInsert      time.Time         `cql:"date_insert"        json:"date_insert,omitempty"          formatter:"RFC3339Milli"`
-		DateUpdate      time.Time         `cql:"date_update"        json:"date_update,omitempty"          formatter:"RFC3339Milli"`
-		Deleted         time.Time         `cql:"deleted"            json:"deleted,omitempty"              formatter:"RFC3339Milli"`
-		Emails          []EmailContact    `cql:"emails"             json:"emails,omitempty"               patch:"user"`
-		FamilyName      string            `cql:"family_name"        json:"family_name,omitempty"          patch:"user"`
-		GivenName       string            `cql:"given_name"         json:"given_name,omitempty"           patch:"user"`
-		Groups          []string          `cql:"groups"             json:"groups,omitempty"               patch:"user"`
-		Identities      []SocialIdentity  `cql:"identities"         json:"identities,omitempty"           patch:"user"`
-		Ims             []IM              `cql:"ims"                json:"ims,omitempty"                  patch:"user"`
-		Infos           map[string]string `cql:"infos"              json:"infos,omitempty"                patch:"user"`
-		NamePrefix      string            `cql:"name_prefix"        json:"name_prefix,omitempty"          patch:"user"`
-		NameSuffix      string            `cql:"name_suffix"        json:"name_suffix,omitempty"          patch:"user"`
-		Organizations   []Organization    `cql:"organizations"      json:"organizations,omitempty"        patch:"user"`
-		Phones          []Phone           `cql:"phones"             json:"phones,omitempty"               patch:"user"`
-		PrivacyIndex    *PrivacyIndex     `cql:"pi"                 json:"pi,omitempty"`
-		PublicKeys      []PublicKey       `cql:"-"                  json:"public_keys,omitempty"          patch:"user"`
-		PrivacyFeatures *PrivacyFeatures  `cql:"privacy_features"   json:"privacy_features,omitempty"`
-		Tags            []string          `cql:"tagnames"           json:"tags,omitempty"                 patch:"system"`
-		Title           string            `cql:"title"              json:"title,omitempty"                patch:"user"`
-		UserId          UUID              `cql:"user_id"            json:"user_id,omitempty"      elastic:"omit"`
+		Locker          *sync.Mutex        `cql:"-"                  json:"-"`
+		AdditionalName  string             `cql:"additional_name"    json:"additional_name,omitempty"      patch:"user"`
+		Addresses       []PostalAddress    `cql:"addresses"          json:"addresses,omitempty"            patch:"user"`
+		Avatar          string             `cql:"avatar"             json:"avatar,omitempty"               patch:"user"`
+		ContactId       UUID               `cql:"contact_id"         json:"contact_id,omitempty"   elastic:"omit"`
+		DateInsert      time.Time          `cql:"date_insert"        json:"date_insert,omitempty"          formatter:"RFC3339Milli"`
+		DateUpdate      time.Time          `cql:"date_update"        json:"date_update,omitempty"          formatter:"RFC3339Milli"`
+		Deleted         time.Time          `cql:"deleted"            json:"deleted,omitempty"              formatter:"RFC3339Milli"`
+		Emails          []EmailContact     `cql:"emails"             json:"emails,omitempty"               patch:"user"`
+		FamilyName      string             `cql:"family_name"        json:"family_name,omitempty"          patch:"user"`
+		GivenName       string             `cql:"given_name"         json:"given_name,omitempty"           patch:"user"`
+		Groups          []string           `cql:"groups"             json:"groups,omitempty"               patch:"user"`
+		Identities      []SocialIdentity   `cql:"identities"         json:"identities,omitempty"           patch:"user"`
+		Ims             []IM               `cql:"ims"                json:"ims,omitempty"                  patch:"user"`
+		Infos           map[string]string  `cql:"infos"              json:"infos,omitempty"                patch:"user"`
+		NamePrefix      string             `cql:"name_prefix"        json:"name_prefix,omitempty"          patch:"user"`
+		NameSuffix      string             `cql:"name_suffix"        json:"name_suffix,omitempty"          patch:"user"`
+		Organizations   []Organization     `cql:"organizations"      json:"organizations,omitempty"        patch:"user"`
+		Phones          []Phone            `cql:"phones"             json:"phones,omitempty"               patch:"user"`
+		PrivacyIndex    *PrivacyIndex      `cql:"pi"                 json:"pi,omitempty"`
+		PublicKeys      []ContactPublicKey `cql:"-"                  json:"public_keys,omitempty"          patch:"user"`
+		PrivacyFeatures *PrivacyFeatures   `cql:"privacy_features"   json:"privacy_features,omitempty"`
+		Tags            []string           `cql:"tagnames"           json:"tags,omitempty"                 patch:"system"`
+		Title           string             `cql:"title"              json:"title,omitempty"                patch:"user"`
+		UserId          UUID               `cql:"user_id"            json:"user_id,omitempty"      elastic:"omit"`
 	}
 
 	// ContactByContactPoints is the model of a Cassandra table to lookup contacts by address/email/phone/etc.
@@ -50,7 +49,7 @@ type (
 	}
 )
 
-// unmarshal a map[string]interface{} that must owns all Contact's fields
+// UnmarshalCQLMap hydrates a Contact with data from a map[string]interface{}
 // typical usage is for unmarshaling response from Cassandra backend
 func (contact *Contact) UnmarshalCQLMap(input map[string]interface{}) {
 	if additionalName, ok := input["additional_name"].(string); ok {
@@ -222,6 +221,7 @@ func (c *Contact) UnmarshalJSON(b []byte) error {
 	return c.UnmarshalMap(input)
 }
 
+// UnmarshalMap hydrates a Contact with data from a map[string]interface{}
 func (c *Contact) UnmarshalMap(input map[string]interface{}) error {
 
 	if additionalName, ok := input["additional_name"].(string); ok {
@@ -338,9 +338,9 @@ func (c *Contact) UnmarshalMap(input map[string]interface{}) error {
 	}
 	//PublicKeys
 	if pks, ok := input["public_keys"]; ok && pks != nil {
-		c.PublicKeys = []PublicKey{}
+		c.PublicKeys = []ContactPublicKey{}
 		for _, pk := range pks.([]interface{}) {
-			K := new(PublicKey)
+			K := new(ContactPublicKey)
 			if err := K.UnmarshalMap(pk.(map[string]interface{})); err == nil {
 				c.PublicKeys = append(c.PublicKeys, *K)
 			}
@@ -400,7 +400,7 @@ func (c *Contact) NewEmpty() interface{} {
 	c.Infos = map[string]string{}
 	c.Organizations = []Organization{}
 	c.Phones = []Phone{}
-	c.PublicKeys = []PublicKey{}
+	c.PublicKeys = []ContactPublicKey{}
 	c.Tags = []string{}
 	return c
 }
@@ -448,7 +448,7 @@ func (c *Contact) GetSetNested() <-chan interface{} {
 // GetRelatedList returns a map[PropertyKey]Type of structs that are embedded into a Contact from joined tables
 func (c *Contact) GetRelatedList() map[string]interface{} {
 	return map[string]interface{}{
-		"PublicKeys": &PublicKey{},
+		"PublicKeys": &ContactPublicKey{},
 	}
 }
 
