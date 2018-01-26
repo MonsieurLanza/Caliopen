@@ -1,0 +1,11 @@
+{
+  "device.no-selected-device": {
+    "defaults": "No selected device",
+    "origin": [
+      [
+        "src/scenes/DevicesSettings/presenter.jsx",
+        62
+      ]
+    ]
+  }
+}

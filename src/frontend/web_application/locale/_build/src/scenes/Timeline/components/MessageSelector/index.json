@@ -1,0 +1,11 @@
+{
+  "message-list.message.selected": {
+    "defaults": "{0, plural, one {{count}/{totalCount} message:} other {{count}/{totalCount} messages:}}",
+    "origin": [
+      [
+        "src/scenes/Timeline/components/MessageSelector/index.jsx",
+        59
+      ]
+    ]
+  }
+}

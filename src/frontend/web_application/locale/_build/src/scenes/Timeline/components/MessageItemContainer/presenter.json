@@ -1,36 +1,9 @@
 {
-  "message-item.action.delete": {
-    "defaults": "Delete",
-    "origin": [
-      [
-        "src/scenes/Timeline/components/MessageItemContainer/presenter.jsx",
-        96
-      ]
-    ]
-  },
-  "message-item.action.reply": {
-    "defaults": "Reply",
-    "origin": [
-      [
-        "src/scenes/Timeline/components/MessageItemContainer/presenter.jsx",
-        99
-      ]
-    ]
-  },
-  "message-item.action.manage_tags": {
-    "defaults": "Manage tags",
-    "origin": [
-      [
-        "src/scenes/Timeline/components/MessageItemContainer/presenter.jsx",
-        102
-      ]
-    ]
-  },
   "tags.header.title": {
     "origin": [
       [
         "src/scenes/Timeline/components/MessageItemContainer/presenter.jsx",
-        114
+        85
       ]
     ]
   },
@@ -39,7 +12,7 @@
     "origin": [
       [
         "src/scenes/Timeline/components/MessageItemContainer/presenter.jsx",
-        127
+        98
       ]
     ]
   }

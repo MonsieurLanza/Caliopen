@@ -1,0 +1,172 @@
+{
+  "device.feedback.invalid_ip": {
+    "defaults": "IP or subnet address is invalid.",
+    "origin": [
+      [
+        "src/scenes/DevicesSettings/components/DeviceForm/presenter.jsx",
+        65
+      ]
+    ]
+  },
+  "device.type.desktop": {
+    "defaults": "Desktop",
+    "origin": [
+      [
+        "src/scenes/DevicesSettings/components/DeviceForm/presenter.jsx",
+        76
+      ]
+    ]
+  },
+  "device.type.laptop": {
+    "defaults": "Laptop",
+    "origin": [
+      [
+        "src/scenes/DevicesSettings/components/DeviceForm/presenter.jsx",
+        77
+      ]
+    ]
+  },
+  "device.type.smartphone": {
+    "defaults": "Smartphone",
+    "origin": [
+      [
+        "src/scenes/DevicesSettings/components/DeviceForm/presenter.jsx",
+        78
+      ]
+    ]
+  },
+  "device.type.tablet": {
+    "defaults": "Tablet",
+    "origin": [
+      [
+        "src/scenes/DevicesSettings/components/DeviceForm/presenter.jsx",
+        79
+      ]
+    ]
+  },
+  "device.location.type.unknown": {
+    "defaults": "Unknown",
+    "origin": [
+      [
+        "src/scenes/DevicesSettings/components/DeviceForm/presenter.jsx",
+        82
+      ]
+    ]
+  },
+  "device.location.type.home": {
+    "defaults": "Home",
+    "origin": [
+      [
+        "src/scenes/DevicesSettings/components/DeviceForm/presenter.jsx",
+        83
+      ]
+    ]
+  },
+  "device.location.type.work": {
+    "defaults": "Work",
+    "origin": [
+      [
+        "src/scenes/DevicesSettings/components/DeviceForm/presenter.jsx",
+        84
+      ]
+    ]
+  },
+  "device.location.type.public": {
+    "defaults": "Public",
+    "origin": [
+      [
+        "src/scenes/DevicesSettings/components/DeviceForm/presenter.jsx",
+        85
+      ]
+    ]
+  },
+  "device.form.locations.address.label": {
+    "defaults": "IP or subnet mask",
+    "origin": [
+      [
+        "src/scenes/DevicesSettings/components/DeviceForm/presenter.jsx",
+        105
+      ]
+    ]
+  },
+  "device.form.locations.type.label": {
+    "defaults": "Connection location",
+    "origin": [
+      [
+        "src/scenes/DevicesSettings/components/DeviceForm/presenter.jsx",
+        113
+      ]
+    ]
+  },
+  "device.manage_form.name.label": {
+    "defaults": "Name:",
+    "origin": [
+      [
+        "src/scenes/DevicesSettings/components/DeviceForm/presenter.jsx",
+        127
+      ],
+      [
+        "src/scenes/DevicesSettings/components/DeviceForm/presenter.jsx",
+        134
+      ]
+    ]
+  },
+  "device.manage_form.name.infotext": {
+    "defaults": "This is the name which allows you to identify your device everywhere.",
+    "origin": [
+      [
+        "src/scenes/DevicesSettings/components/DeviceForm/presenter.jsx",
+        130
+      ]
+    ]
+  },
+  "device.manage_form.type.label": {
+    "defaults": "Type:",
+    "origin": [
+      [
+        "src/scenes/DevicesSettings/components/DeviceForm/presenter.jsx",
+        145
+      ],
+      [
+        "src/scenes/DevicesSettings/components/DeviceForm/presenter.jsx",
+        153
+      ]
+    ]
+  },
+  "device.manage_form.type.infotext": {
+    "defaults": "You can select the type of your device: smartphone, tablet, laptop or desktop.",
+    "origin": [
+      [
+        "src/scenes/DevicesSettings/components/DeviceForm/presenter.jsx",
+        148
+      ]
+    ]
+  },
+  "device.manage_form.ips.label": {
+    "defaults": "IP or subnet address",
+    "origin": [
+      [
+        "src/scenes/DevicesSettings/components/DeviceForm/presenter.jsx",
+        165
+      ]
+    ]
+  },
+  "device.manage_form.ips.infotext": {
+    "defaults": "Restrict the access of your account to certain IP addresses for this device. (e.g. 192.168.10 or 192.168.1.1/24 or 192.168.1.1-20)",
+    "origin": [
+      [
+        "src/scenes/DevicesSettings/components/DeviceForm/presenter.jsx",
+        168
+      ]
+    ]
+  },
+  "device.action.save_changes": {
+    "defaults": "Save modifications",
+    "origin": [
+      [
+        "src/scenes/DevicesSettings/components/DeviceForm/presenter.jsx",
+        183
+      ]
+    ]
+  }
+}

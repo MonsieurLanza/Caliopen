@@ -1,0 +1,38 @@
+{
+  "device.info.date_insert": {
+    "defaults": "Insert date",
+    "origin": [
+      [
+        "src/scenes/DevicesSettings/components/DeviceInformation/presenter.jsx",
+        22
+      ]
+    ]
+  },
+  "device.info.last_seen": {
+    "defaults": "Last connection",
+    "origin": [
+      [
+        "src/scenes/DevicesSettings/components/DeviceInformation/presenter.jsx",
+        23
+      ]
+    ]
+  },
+  "device.info.os": {
+    "defaults": "Operating System",
+    "origin": [
+      [
+        "src/scenes/DevicesSettings/components/DeviceInformation/presenter.jsx",
+        24
+      ]
+    ]
+  },
+  "device.info.os-version": {
+    "defaults": "Version",
+    "origin": [
+      [
+        "src/scenes/DevicesSettings/components/DeviceInformation/presenter.jsx",
+        25
+      ]
+    ]
+  }
+}

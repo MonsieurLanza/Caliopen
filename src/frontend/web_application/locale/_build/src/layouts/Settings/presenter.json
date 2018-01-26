@@ -16,5 +16,14 @@
         24
       ]
     ]
+  },
+  "settings.devices": {
+    "defaults": "Devices",
+    "origin": [
+      [
+        "src/layouts/Settings/presenter.jsx",
+        25
+      ]
+    ]
   }
 }

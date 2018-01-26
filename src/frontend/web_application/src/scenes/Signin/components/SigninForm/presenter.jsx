@@ -160,7 +160,7 @@ class SigninForm extends Component {
                   onClick={this.createHandleSubmit(CONTEXT_UNSECURE)}
                   display="expanded"
                   shape="plain"
-                ><Trans id="signin.action.login_unsecure">I&apos;m in a safe place</Trans></Button>
+                ><Trans id="signin.action.login_unsecure">I&apos;m in a non private place</Trans></Button>
               </FormColumn>
             </FormRow>
             <FormRow>

@@ -1,0 +1,11 @@
+{
+  "device.action.revoke": {
+    "defaults": "Revoke this device",
+    "origin": [
+      [
+        "src/scenes/DevicesSettings/components/RevokeDevice/presenter.jsx",
+        26
+      ]
+    ]
+  }
+}

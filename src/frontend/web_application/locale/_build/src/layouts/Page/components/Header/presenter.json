@@ -4,16 +4,7 @@
     "origin": [
       [
         "src/layouts/Page/components/Header/presenter.jsx",
-        44
-      ]
-    ]
-  },
-  "header.menu.toggle-search-form": {
-    "defaults": "Toggle search form",
-    "origin": [
-      [
-        "src/layouts/Page/components/Header/presenter.jsx",
-        56
+        43
       ]
     ]
   }

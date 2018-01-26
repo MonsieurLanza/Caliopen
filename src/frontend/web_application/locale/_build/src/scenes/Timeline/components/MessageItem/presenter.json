@@ -4,7 +4,25 @@
     "origin": [
       [
         "src/scenes/Timeline/components/MessageItem/presenter.jsx",
-        81
+        92
+      ]
+    ]
+  },
+  "message-list.message.protocol.email": {
+    "defaults": "email",
+    "origin": [
+      [
+        "src/scenes/Timeline/components/MessageItem/presenter.jsx",
+        104
+      ]
+    ]
+  },
+  "message-list.message.received-on": {
+    "defaults": "received on",
+    "origin": [
+      [
+        "src/scenes/Timeline/components/MessageItem/presenter.jsx",
+        115
       ]
     ]
   }

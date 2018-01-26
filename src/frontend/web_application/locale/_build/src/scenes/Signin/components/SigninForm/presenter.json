@@ -4,7 +4,7 @@
     "origin": [
       [
         "src/scenes/Signin/components/SigninForm/presenter.jsx",
-        85
+        92
       ]
     ]
   },
@@ -13,7 +13,7 @@
     "origin": [
       [
         "src/scenes/Signin/components/SigninForm/presenter.jsx",
-        90
+        97
       ]
     ]
   },
@@ -22,7 +22,7 @@
     "origin": [
       [
         "src/scenes/Signin/components/SigninForm/presenter.jsx",
-        104
+        111
       ]
     ]
   },
@@ -31,7 +31,7 @@
     "origin": [
       [
         "src/scenes/Signin/components/SigninForm/presenter.jsx",
-        105
+        112
       ]
     ]
   },
@@ -40,7 +40,7 @@
     "origin": [
       [
         "src/scenes/Signin/components/SigninForm/presenter.jsx",
-        117
+        124
       ]
     ]
   },
@@ -49,16 +49,34 @@
     "origin": [
       [
         "src/scenes/Signin/components/SigninForm/presenter.jsx",
-        118
+        125
       ]
     ]
   },
-  "signin.action.login": {
-    "defaults": "Login",
+  "signin.action.login_safe": {
+    "defaults": "I'm in a safe place",
     "origin": [
       [
         "src/scenes/Signin/components/SigninForm/presenter.jsx",
-        136
+        143
+      ]
+    ]
+  },
+  "signin.action.login_public": {
+    "defaults": "I'm in a public place",
+    "origin": [
+      [
+        "src/scenes/Signin/components/SigninForm/presenter.jsx",
+        153
+      ]
+    ]
+  },
+  "signin.action.login_unsecure": {
+    "defaults": "I'm in a safe place",
+    "origin": [
+      [
+        "src/scenes/Signin/components/SigninForm/presenter.jsx",
+        163
       ]
     ]
   },
@@ -67,7 +85,7 @@
     "origin": [
       [
         "src/scenes/Signin/components/SigninForm/presenter.jsx",
-        141
+        168
       ]
     ]
   }

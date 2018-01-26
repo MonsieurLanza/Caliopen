@@ -1,0 +1,29 @@
+{
+  "device.action.verify": {
+    "defaults": "Verify this device",
+    "origin": [
+      [
+        "src/scenes/DevicesSettings/components/VerifyDevice/presenter.jsx",
+        30
+      ]
+    ]
+  },
+  "device.verify.not-you": {
+    "defaults": "It's not you?",
+    "origin": [
+      [
+        "src/scenes/DevicesSettings/components/VerifyDevice/presenter.jsx",
+        32
+      ]
+    ]
+  },
+  "device.action.delete": {
+    "defaults": "Delete",
+    "origin": [
+      [
+        "src/scenes/DevicesSettings/components/VerifyDevice/presenter.jsx",
+        34
+      ]
+    ]
+  }
+}

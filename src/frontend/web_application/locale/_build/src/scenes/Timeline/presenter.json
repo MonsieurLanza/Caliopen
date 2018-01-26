@@ -1,10 +1,27 @@
 {
+  "tags.header.title": {
+    "origin": [
+      [
+        "src/scenes/Timeline/presenter.jsx",
+        168
+      ]
+    ]
+  },
+  "tags.header.label": {
+    "defaults": "Tags",
+    "origin": [
+      [
+        "src/scenes/Timeline/presenter.jsx",
+        181
+      ]
+    ]
+  },
   "header.menu.discussions": {
     "defaults": "Messages",
     "origin": [
       [
         "src/scenes/Timeline/presenter.jsx",
-        87
+        197
       ]
     ]
   },
@@ -13,7 +30,7 @@
     "origin": [
       [
         "src/scenes/Timeline/presenter.jsx",
-        96
+        224
       ]
     ]
   }
