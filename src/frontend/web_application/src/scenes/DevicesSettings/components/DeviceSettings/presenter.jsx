@@ -65,16 +65,21 @@ class DeviceSettings extends Component {
     );
   }
 
+  renderDevice() {
+    const { device, i18n } = this.props;
+
+    return device.signature_key === null ?
+      this.renderVerifyDevice(device, i18n) :
+      this.renderForm(device, i18n);
+  }
+
   render() {
-    const { device, isFetching, i18n } = this.props;
+    const { device, isFetching } = this.props;
 
     return (
       <div className="m-device-settings">
         {isFetching && <Spinner isLoading />}
-        {device.signature_key === null ?
-          this.renderVerifyDevice(device, i18n) :
-          this.renderForm(device, i18n)
-        }
+        {device && this.renderDevice()}
       </div>
     );
   }

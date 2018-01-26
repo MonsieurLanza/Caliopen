@@ -5,7 +5,7 @@ import { withI18n } from 'lingui-react';
 import Presenter from './presenter';
 
 const devicesSelector = state => state.device.devicesById;
-const deviceIdSelector = (state, ownProps) => ownProps.params.deviceId;
+const deviceIdSelector = (state, ownProps) => ownProps.match.params.deviceId;
 
 const mapStateToProps = createSelector(
   [devicesSelector, deviceIdSelector],
