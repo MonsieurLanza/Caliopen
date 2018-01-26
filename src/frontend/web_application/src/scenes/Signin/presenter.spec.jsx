@@ -14,6 +14,6 @@ describe('scene - Signin', () => {
       <Presenter i18n={i18n} location={{ search: '' }} />
     );
 
-    expect(comp.text()).toContain('SigninForm');
+    expect(comp.text()).toContain('WithDevice');
   });
 });

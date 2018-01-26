@@ -15,6 +15,6 @@ describe('scene - Signin', () => {
       <Presenter __={translator} onSignupSuccess={noop} />
     );
 
-    expect(comp.text()).toContain('SignupForm');
+    expect(comp.text()).toContain('WithDevice');
   });
 });
