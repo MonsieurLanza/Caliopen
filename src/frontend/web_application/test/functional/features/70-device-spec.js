@@ -2,7 +2,6 @@ const { signin } = require('../utils/user-util');
 
 describe('device', () => {
   const clearKeypairInLocalStorage = () => browser.get('/')
-    .then(() => browser.pause())
     .then(() => browser.executeScript(`
       window.localStorage.removeItem('device.curve');
       window.localStorage.removeItem('device.hash');
