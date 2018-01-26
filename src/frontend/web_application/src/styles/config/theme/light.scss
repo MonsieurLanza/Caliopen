@@ -44,6 +44,12 @@ $privacy-palette: (
   ugly: #ed0e47,
 );
 
+$context-palette: (
+  safe: #ec0f48,
+  public: #ebc064,
+  unsecure: #07b798,
+);
+
 // contrasted foreground
 $co-color__contrast__back:                  #333;
 $co-color__contrast__back--lower:           darken($co-color__contrast__back, 5%);
